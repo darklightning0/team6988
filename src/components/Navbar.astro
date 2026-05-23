@@ -1,0 +1,156 @@
+---
+const links = [
+  { label: 'Home', href: '#' },
+  { label: 'About Us', href: '#about' },
+  { label: 'Robots', href: '#robots' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Sponsors', href: '#sponsors' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<nav
+  id="navbar"
+  class="fixed top-0 z-50 w-full border-b border-team-tertiary-800/50 shadow-xl shadow-team-dark/50 transition-all duration-500 ease-out"
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="flex items-center justify-between py-4">
+      <a
+        href="#"
+        class="text-lg font-bold tracking-wide text-team-light transition-all duration-500 ease-out hover:text-team-secondary-300"
+      >
+        Team 6988
+      </a>
+
+      <button
+        id="menu-toggle"
+        type="button"
+        class="inline-flex items-center justify-center rounded-md p-2 text-team-tertiary-300 transition-all duration-500 ease-out hover:bg-team-dark-800 hover:text-team-secondary md:hidden"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label="Toggle navigation menu"
+      >
+        <svg
+          id="menu-icon-open"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+        <svg
+          id="menu-icon-close"
+          class="hidden h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18 18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <ul class="hidden items-center gap-8 md:flex">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm font-medium text-team-light transition-all duration-500 ease-out hover:text-team-secondary"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div
+      id="mobile-menu"
+      class="hidden border-t border-team-tertiary-800/60 pb-4 md:hidden"
+    >
+      <ul class="flex flex-col gap-1 pt-2">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="mobile-nav-link block rounded-md px-2 py-3 text-base font-medium text-team-primary-300 transition-all duration-500 ease-out hover:bg-team-dark-800 hover:text-team-secondary"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  if (!navbar) throw new Error('Navbar element not found');
+
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIconOpen = document.getElementById('menu-icon-open');
+  const menuIconClose = document.getElementById('menu-icon-close');
+
+  if (!menuToggle || !mobileMenu || !menuIconOpen || !menuIconClose) {
+    throw new Error('Mobile menu elements not found');
+  }
+
+  let lastScrollY = window.scrollY;
+  let menuOpen = false;
+
+  const setMenuOpen = (open: boolean) => {
+    menuOpen = open;
+    menuToggle.setAttribute('aria-expanded', String(open));
+    mobileMenu.classList.toggle('hidden', !open);
+    menuIconOpen.classList.toggle('hidden', open);
+    menuIconClose.classList.toggle('hidden', !open);
+  };
+
+  menuToggle.addEventListener('click', () => {
+    setMenuOpen(!menuOpen);
+  });
+
+  mobileMenu.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    link.addEventListener('click', () => setMenuOpen(false));
+  });
+
+  const updateNavbar = () => {
+    const currentScrollY = window.scrollY;
+    const scrollingDown = currentScrollY > lastScrollY;
+    const scrolledPastTop = currentScrollY > 0;
+
+    if (scrolledPastTop) {
+      navbar.classList.add('bg-team-dark-950');
+    } else {
+      navbar.classList.remove('bg-team-dark-950');
+    }
+
+    if (scrollingDown && currentScrollY > 64) {
+      navbar.classList.add('-translate-y-full');
+      setMenuOpen(false);
+    } else {
+      navbar.classList.remove('-translate-y-full');
+    }
+
+    lastScrollY = currentScrollY;
+  };
+
+  window.addEventListener('scroll', updateNavbar, { passive: true });
+  updateNavbar();
+</script>

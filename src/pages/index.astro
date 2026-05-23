@@ -1,17 +1,47 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import SponsorMarquee from '../components/SponsorMarquee.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import PreviewCard from '../components/PreviewCard.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <Navbar />
+  <Hero />
+  <SponsorMarquee />
+
+  <section class="mx-auto max-w-7xl px-4 py-24">
+    <SectionHeader title="EXPLORE OUR TEAM" />
+
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+      <PreviewCard
+        title="About Us"
+        description="Meet the students, mentors, and alumni driving Team 6988 forward."
+        linkText="Meet the Team"
+        href="/about"
+        imgSrc="/cards_1.webp"
+      />
+      <PreviewCard
+        title="Our Robots"
+        description="Explore our mechanical subsystems, Onshape CAD assemblies, and custom Bambu Lab P1S 3D printed components."
+        linkText="View Specs"
+        href="/robots"
+        imgSrc="/cards_2.webp"
+      />
+      <PreviewCard
+        title="Impact & Projects"
+        description="Discover our community outreach initiatives, our Impact Award journey, and our run in the Newton Division."
+        linkText="See Our Impact"
+        href="/projects"
+        imgSrc="/cards_3.webp"
+      />
+    </div>
+  </section>
+
+  <Contact />
+  <Footer />
+</Layout>

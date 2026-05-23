@@ -1,0 +1,18 @@
+---
+interface Props {
+  title: string;
+  tone?: 'light' | 'dark';
+}
+
+const { title, tone = 'light' } = Astro.props;
+
+const textColor = tone === 'dark' ? 'text-team-dark' : 'text-team-light';
+---
+
+<header class="text-center">
+  <h2
+    class={`mb-16 text-5xl font-black tracking-tighter md:text-6xl lg:text-7xl ${textColor}`}
+  >
+    {title}
+  </h2>
+</header>

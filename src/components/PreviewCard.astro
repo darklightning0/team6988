@@ -1,0 +1,38 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  linkText: string;
+  href: string;
+  imgSrc: string;
+}
+
+const { title, description, linkText, href, imgSrc } = Astro.props;
+---
+
+<article
+  class="group flex h-full flex-col overflow-hidden rounded-xl border border-team-tertiary-800/60 bg-team-dark-900 shadow-xl shadow-team-dark/50 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-team-secondary"
+>
+  <img
+    src={imgSrc}
+    alt={title}
+    class="h-48 w-full object-cover"
+    loading="lazy"
+  />
+
+  <div class="flex flex-grow flex-col p-6">
+    <h3 class="mb-3 text-2xl font-bold text-team-tertiary-200">{title}</h3>
+    <p class="mb-6 line-clamp-3 text-team-light/80">{description}</p>
+    <a
+      href={href}
+      class="mt-auto inline-flex items-center gap-1 font-semibold text-team-accent transition-all duration-500 ease-out group-hover:text-team-accent-400"
+    >
+      {linkText}
+      <span
+        aria-hidden="true"
+        class="transition-transform duration-500 ease-out group-hover:translate-x-1"
+        >→</span
+      >
+    </a>
+  </div>
+</article>

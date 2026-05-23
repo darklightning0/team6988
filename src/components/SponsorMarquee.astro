@@ -1,0 +1,75 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+const sponsors = Array.from(
+  { length: 14 },
+  (_, i) => `/sponsor_logos/${i + 1}.png`,
+);
+
+const logoLinkClass = 'inline-flex items-center';
+
+const logoImgClass =
+  'h-20 w-auto object-contain transition-transform duration-300 hover:scale-110 md:h-28';
+---
+
+<section class="w-full bg-team-light px-4 pb-16 pt-12">
+  <SectionHeader title="SPONSORED BY" tone="dark" />
+
+  <div
+    class="marquee-outer relative flex w-full overflow-hidden whitespace-nowrap"
+  >
+    <div
+      class="marquee-track flex min-w-full shrink-0 items-center justify-around gap-16 px-8"
+    >
+      {
+        sponsors.map((src) => (
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class={logoLinkClass}
+          >
+            <img src={src} alt="Sponsor logo" class={logoImgClass} loading="lazy" />
+          </a>
+        ))
+      }
+    </div>
+    <div
+      class="marquee-track flex min-w-full shrink-0 items-center justify-around gap-16 px-8"
+      aria-hidden="true"
+    >
+      {
+        sponsors.map((src) => (
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            tabindex="-1"
+            class={logoLinkClass}
+          >
+            <img src={src} alt="" class={logoImgClass} loading="lazy" />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  .marquee-track {
+    animation: marquee 15s linear infinite;
+  }
+
+  .marquee-outer:hover .marquee-track {
+    animation-play-state: paused;
+  }
+</style>
