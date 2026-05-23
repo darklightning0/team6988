@@ -2,11 +2,27 @@
 const links = [
   { label: 'Home', href: '#' },
   { label: 'About Us', href: '#about' },
-  { label: 'Robots', href: '#robots' },
   { label: 'Projects', href: '#projects' },
   { label: 'Sponsors', href: '#sponsors' },
   { label: 'Contact', href: '#contact' },
 ];
+
+const robotLinks = [
+  { label: 'Technical Binder', href: '/robots/technical-binder' },
+  { label: '2026 Robot', href: '/robots/2026' },
+];
+
+const navLinkClass =
+  'text-sm font-medium text-team-light transition-all duration-500 ease-out hover:text-team-secondary';
+
+const dropdownLinkClass =
+  'text-team-light hover:text-team-accent px-4 py-2 hover:bg-team-dark/50 transition-all duration-500 ease-out';
+
+const mobileNavLinkClass =
+  'mobile-nav-link block rounded-md px-2 py-3 text-base font-medium text-team-primary-300 transition-all duration-500 ease-out hover:bg-team-dark-800 hover:text-team-secondary';
+
+const mobileSubNavLinkClass =
+  'mobile-nav-link block rounded-md py-2 pl-8 pr-2 text-base font-medium text-team-primary-300 transition-all duration-500 ease-out hover:bg-team-dark-800 hover:text-team-secondary';
 ---
 
 <nav
@@ -62,12 +78,36 @@ const links = [
 
       <ul class="hidden items-center gap-8 md:flex">
         {
-          links.map((link) => (
+          links.slice(0, 2).map((link) => (
             <li>
-              <a
-                href={link.href}
-                class="text-sm font-medium text-team-light transition-all duration-500 ease-out hover:text-team-secondary"
-              >
+              <a href={link.href} class={navLinkClass}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+
+        <li class="group relative">
+          <a href="#robots" class={navLinkClass}>
+            Robots
+          </a>
+          <div
+            class="absolute top-full left-0 hidden min-w-[200px] flex-col rounded-lg border border-team-tertiary bg-team-dark py-2 shadow-xl transition-all group-hover:flex"
+          >
+            {
+              robotLinks.map((link) => (
+                <a href={link.href} class={dropdownLinkClass}>
+                  {link.label}
+                </a>
+              ))
+            }
+          </div>
+        </li>
+
+        {
+          links.slice(2).map((link) => (
+            <li>
+              <a href={link.href} class={navLinkClass}>
                 {link.label}
               </a>
             </li>
@@ -82,12 +122,34 @@ const links = [
     >
       <ul class="flex flex-col gap-1 pt-2">
         {
-          links.map((link) => (
+          links.slice(0, 2).map((link) => (
             <li>
-              <a
-                href={link.href}
-                class="mobile-nav-link block rounded-md px-2 py-3 text-base font-medium text-team-primary-300 transition-all duration-500 ease-out hover:bg-team-dark-800 hover:text-team-secondary"
-              >
+              <a href={link.href} class={mobileNavLinkClass}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+
+        <li>
+          <a href="#robots" class={mobileNavLinkClass}>
+            Robots
+          </a>
+        </li>
+        {
+          robotLinks.map((link) => (
+            <li>
+              <a href={link.href} class={mobileSubNavLinkClass}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+
+        {
+          links.slice(2).map((link) => (
+            <li>
+              <a href={link.href} class={mobileNavLinkClass}>
                 {link.label}
               </a>
             </li>
