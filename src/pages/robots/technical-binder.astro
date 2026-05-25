@@ -75,10 +75,10 @@ import Layout from '../../layouts/Layout.astro';
         right: 10vw !important;
       }
       .text-overlay > div[class*="md:top-24"] {
-        top: 15vh !important;
+        top: 15dvh !important;
       }
       .text-overlay > div[class*="md:bottom-32"] {
-        bottom: 18vh !important;
+        bottom: 18dvh !important;
       }
       .text-overlay > div h2 {
         font-size: 1.1rem !important;
@@ -100,13 +100,28 @@ import Layout from '../../layouts/Layout.astro';
     #drawer-chevron.rotated {
       transform: rotate(180deg);
     }
+
+    /* Prevent dynamic mobile page scrolling and enforce exact dynamic heights */
+    html, body {
+      height: 100dvh !important;
+      overflow: hidden !important;
+    }
+    .dvh-screen {
+      height: 100dvh !important;
+    }
+    .dvh-min-screen {
+      min-height: 100dvh !important;
+    }
+    .dvh-track {
+      height: 200dvh !important;
+    }
   </style>
 
-  <main class="h-screen w-full overflow-hidden bg-team-dark relative font-sans">
+  <main class="h-screen dvh-screen w-full overflow-hidden bg-team-dark relative font-sans">
     
-    <div id="slide-track" class="w-full h-[200vh] transform translate-y-0" style="transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);">
+    <div id="slide-track" class="w-full h-[200vh] dvh-track transform translate-y-0" style="transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);">
       
-      <section class="h-screen w-full relative bg-team-dark">
+      <section class="h-screen dvh-screen w-full relative bg-team-dark">
         
         <div id="aps-viewer" class="absolute inset-0 z-0"></div>
 
@@ -355,7 +370,7 @@ import Layout from '../../layouts/Layout.astro';
 
       </section>
 
-      <section class="min-h-screen w-full relative bg-team-light flex flex-col items-center pt-16 md:pt-24 pb-8 md:pb-12 px-4 md:px-8">
+      <section class="min-h-screen dvh-min-screen w-full relative bg-team-light flex flex-col items-center pt-16 md:pt-24 pb-8 md:pb-12 px-4 md:px-8">
         
         <div class="absolute top-6 md:top-10 left-1/2 transform -translate-x-1/2 z-50">
           <svg onclick="scrollToCAD()" class="w-8 h-8 md:w-10 md:h-10 text-team-brand-accent cursor-pointer animate-pulse-glow hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -391,7 +406,7 @@ import Layout from '../../layouts/Layout.astro';
   <script is:inline>
     // --- SCROLL NAVIGATION LOGIC ---
     function scrollToSoftware() {
-      document.getElementById('slide-track').style.transform = 'translateY(-100vh)';
+      document.getElementById('slide-track').style.transform = 'translateY(-100dvh)';
     }
 
     function scrollToCAD() {
@@ -431,11 +446,36 @@ import Layout from '../../layouts/Layout.astro';
           viewer.loadExtension('Autodesk.ViewCubeUi').then((viewCubeExt) => {
             
             function setInitialCamera() {
+              // 1. Set the face orientation using ViewCube
               viewCubeExt.setViewCube('front-top-left'); 
-              // Scale camera out more on smaller screens since the aspect ratio is taller
-              let scaleFactor = window.innerWidth < 768 ? 2.0 : (window.innerWidth < 1024 ? 1.6 : 1.2);
-              viewer.navigation.getCamera().position.multiplyScalar(scaleFactor); 
-              viewer.navigation.updateCamera();
+              
+              // 2. Wait a brief moment to ensure orientation is updated in navigation
+              setTimeout(() => {
+                // Fit the entire model to the viewport first to compute the starting camera/target
+                viewer.fitToView();
+                
+                const nav = viewer.navigation;
+                const camera = nav.getCamera();
+                const targetCoord = nav.getTarget();
+                const pos = camera.position;
+                
+                // Scale camera out more on smaller screens since the aspect ratio is taller
+                let scaleFactor = window.innerWidth < 768 ? 2.25 : (window.innerWidth < 1024 ? 1.75 : 1.25);
+                
+                // Get the direction vector from target to camera position
+                const dir = new THREE.Vector3().subVectors(pos, targetCoord);
+                
+                // Scale the distance along the line of sight
+                dir.multiplyScalar(scaleFactor);
+                
+                const newPos = new THREE.Vector3().addVectors(targetCoord, dir);
+                
+                // Set the updated camera values instantly
+                nav.setRequestTransition(false);
+                nav.setPosition(newPos);
+                nav.setTarget(targetCoord);
+                nav.updateCamera();
+              }, 150);
             }
 
             if (viewer.model && viewer.model.isLoadDone()) {
