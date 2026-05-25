@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+
+const projects = [
+  {
+    title: 'STEM Summer Camps',
+    tag: 'Outreach',
+    description: 'Organized and executed multiple STEM summer camps for middle school students, teaching CAD on Onshape, basic 3D printing mechanics, and Scratch/Robotics logic.',
+    stats: '150+ Students Mentored',
+    glow: 'rgba(38,158,135,0.3)',
+  },
+  {
+    title: 'FLL Team Mentorship',
+    tag: 'FIRST Impact',
+    description: 'Directly mentored 4 local FIRST LEGO League (FLL) teams, guiding them through mechanical design, core values, and helping them secure regional awards.',
+    stats: '4 FLL Teams Supported',
+    glow: 'rgba(24,20,186,0.3)',
+  },
+  {
+    title: 'Custom Scouting Application',
+    tag: 'Software',
+    description: 'Developed a proprietary scouting application used at events to track competitor robot cycles, autonomous routes, and climber reliability for alliance selection.',
+    stats: 'Real-time Telemetry Dashboard',
+    glow: 'rgba(245,158,11,0.3)',
+  },
+  {
+    title: 'CNC & 3D Print Integration',
+    tag: 'Engineering',
+    description: 'Optimized fabrication using custom printed parts from our Bambu Lab P1S printers in carbon fiber nylon and designed lightweight CNC-pocketed chassis plates.',
+    stats: '50+ Custom Parts Fabricated',
+    glow: 'rgba(38,158,135,0.3)',
+  },
+];
+
+const stats = [
+  { value: 'Newton Division', label: 'FIRST World Championship Run' },
+  { value: 'Impact Award', label: 'Spreading FIRST Culture' },
+  { value: '95%+', label: 'Outreach Student Graduation in STEM' },
+  { value: '3,000+', label: 'Community Volunteer Hours' },
+];
+---
+
+<Layout>
+  <Navbar />
+
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 overflow-hidden bg-team-dark">
+    <!-- Deep grid & overlay -->
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_40%,transparent_100%)] pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-team-primary/10 rounded-full blur-[120px] pointer-events-none" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto max-w-7xl px-4 text-center">
+      <span class="text-[9px] md:text-[10px] font-black tracking-[0.4em] text-team-secondary uppercase">
+        OUR OUTREACH, PROJECTS & HONORS
+      </span>
+      <h1 class="mt-4 text-4xl font-black tracking-tighter text-team-light md:text-7xl uppercase italic">
+        PROJECTS & IMPACT
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-xs md:text-sm leading-relaxed text-team-light/65 uppercase tracking-wider">
+        Pioneering STEM accessibility, engineering world-class competition machines, and building lasting community relationships. Discover how Wildbyte is driving technology forward.
+      </p>
+    </div>
+  </section>
+
+  <!-- High Impact Stats Dashboard -->
+  <section class="relative mx-auto max-w-7xl px-4 pb-20">
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+      {stats.map((stat) => (
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 text-center backdrop-blur-md smooth-transition hover:border-team-secondary/35">
+          <div class="text-xl md:text-4xl font-black text-team-secondary uppercase tracking-tight italic select-none">
+            {stat.value}
+          </div>
+          <div class="text-[9px] md:text-[10px] font-bold tracking-widest text-team-light/50 uppercase mt-2">
+            {stat.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Impact Award / Culture Focus -->
+  <section class="relative mx-auto max-w-4xl px-4 py-20 border-t border-white/5">
+    <div class="relative rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12 shadow-[0_12px_40px_rgba(0,0,0,0.3)] backdrop-blur-2xl text-center overflow-hidden">
+      <!-- Glow effect inside -->
+      <div class="absolute -bottom-12 -right-12 w-24 h-24 bg-team-primary/20 rounded-full blur-xl pointer-events-none"></div>
+      
+      <span class="text-[9px] font-black tracking-[0.25em] text-team-secondary uppercase mb-4 block">
+        COMMUNITY ACCESSIBILITY // FIRST IMPACT
+      </span>
+      <h2 class="text-xl md:text-3xl font-black tracking-tighter text-team-light uppercase italic mb-6">
+        OUR IMPACT AWARD JOURNEY
+      </h2>
+      <p class="text-xs md:text-sm leading-relaxed text-team-light/75 mb-6 text-left md:text-center">
+        The FIRST Impact Award (formerly Chairman's Award) is the most prestigious honor in FIRST, celebrating the team that best embodies the mission to transform culture through science and technology. Wildbyte dedicates hundreds of hours annually to making STEM education accessible to underprivileged youth, mentoring rookie teams, and hosting free coding seminars.
+      </p>
+      
+      <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-2 text-[9px] font-black tracking-widest text-team-light uppercase">
+        <span class="h-2 w-2 rounded-full bg-team-secondary animate-pulse"></span>
+        Status: Active Campaign
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Grid -->
+  <section class="relative mx-auto max-w-7xl px-4 py-20 border-t border-white/5">
+    <SectionHeader title="ENGINEERING & OUTREACH INITIATIVES" />
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 mt-12">
+      {projects.map((project) => (
+        <div 
+          class="relative group rounded-3xl border border-white/5 bg-white/5 p-8 backdrop-blur-md smooth-transition hover:border-team-secondary/50 hover:bg-white/10 flex flex-col justify-between"
+          style={`box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);`}
+        >
+          <!-- Neon hover glow -->
+          <div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 smooth-transition pointer-events-none" style={`box-shadow: 0 0 35px ${project.glow};`}></div>
+
+          <div class="space-y-4 relative z-10">
+            <span class="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1 text-[9px] font-black tracking-widest text-team-secondary uppercase">
+              {project.tag}
+            </span>
+            <h3 class="text-lg md:text-xl font-black tracking-tight text-team-light uppercase italic">
+              {project.title}
+            </h3>
+            <p class="text-xs leading-relaxed text-team-light/65">
+              {project.description}
+            </p>
+          </div>
+
+          <div class="mt-6 border-t border-white/5 pt-4 relative z-10">
+            <span class="text-[9px] font-black tracking-widest text-team-light/35 uppercase">
+              Telemetry Key:
+            </span>
+            <span class="ml-2 text-xs font-bold text-team-light select-none italic">
+              {project.stats}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <Contact />
+  <Footer />
+</Layout>

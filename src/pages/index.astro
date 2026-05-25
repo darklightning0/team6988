@@ -20,23 +20,23 @@ import Footer from '../components/Footer.astro';
     <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
       <PreviewCard
         title="About Us"
-        description="Meet the students, mentors, and alumni driving Team 6988 forward."
+        description="Meet the students, mentors, and alumni driving Wildbyte forward."
         linkText="Meet the Team"
-        href="/about"
+        href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/about`}
         imgSrc="/cards_1.webp"
       />
       <PreviewCard
         title="Our Robots"
         description="Explore our mechanical subsystems, Onshape CAD assemblies, and custom Bambu Lab P1S 3D printed components."
         linkText="View Specs"
-        href="/robots"
+        href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/robots`}
         imgSrc="/cards_2.webp"
       />
       <PreviewCard
         title="Impact & Projects"
         description="Discover our community outreach initiatives, our Impact Award journey, and our run in the Newton Division."
         linkText="See Our Impact"
-        href="/projects"
+        href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/projects`}
         imgSrc="/cards_3.webp"
       />
     </div>

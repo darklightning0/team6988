@@ -2,28 +2,29 @@
 import SectionHeader from './SectionHeader.astro';
 
 const inputClass =
-  'w-full rounded-xl border border-team-tertiary-800/70 bg-gradient-to-br from-team-primary-950/40 to-team-tertiary-950/50 px-4 py-3 text-team-light transition-all duration-500 ease-out placeholder:text-team-light/40 focus:border-team-secondary focus:outline-none';
+  'w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-xs md:text-sm font-medium text-team-light tracking-wide placeholder:text-team-light/35 smooth-transition focus:border-team-secondary/80 focus:bg-white/10 focus:outline-none focus:shadow-[0_0_15px_rgba(38,158,135,0.25)]';
 ---
 
-<section class="mx-auto max-w-5xl px-4 py-24">
+<section id="contact" class="mx-auto max-w-5xl px-4 py-24">
   <SectionHeader title="GET IN TOUCH"/>
 
-  <div class="grid gap-12 md:grid-cols-2 md:gap-16">
-    <div class="space-y-10 text-team-light/80">
-      <p class="text-lg leading-relaxed text-team-light/60">
-        Interested in partnering with Team 6988? Reach out about sponsorships,
-        mentoring opportunities, or community events. We would love to hear from
-        you.
+  <div class="grid gap-12 md:grid-cols-2 md:gap-16 items-start">
+    <!-- Left Column Telemetry Details -->
+    <div class="space-y-8">
+      <p class="text-sm md:text-base leading-relaxed text-team-light/65">
+        Interested in partnering with Wildbyte? Reach out about sponsorships,
+        mentoring opportunities, or community events. Our response channels are fully open.
       </p>
 
-      <div class="space-y-8">
-        <div class="space-y-2">
-          <div class="flex items-center gap-2">
+      <div class="space-y-4">
+        <!-- Email Status Box -->
+        <div class="flex flex-col gap-2 p-5 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-md smooth-transition hover:border-team-secondary/40 hover:bg-white/10">
+          <div class="flex items-center gap-2 text-team-secondary select-none">
             <svg
-              class="h-4 w-4 shrink-0 text-team-secondary"
+              class="h-3.5 w-3.5 shrink-0"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              stroke-width="2.5"
               stroke="currentColor"
               aria-hidden="true"
             >
@@ -33,27 +34,24 @@ const inputClass =
                 d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
               ></path>
             </svg>
-            <p
-              class="text-sm font-semibold uppercase tracking-wider text-team-secondary"
-            >
-              Email
-            </p>
+            <span class="text-[9px] font-black tracking-[0.2em] uppercase">COMMUNICATION // EMAIL</span>
           </div>
           <a
             href="mailto:contact@frc6988.com"
-            class="block pl-6 text-lg text-team-accent transition-all duration-500 ease-out hover:text-team-accent-400"
+            class="block text-base md:text-lg font-black tracking-tight text-team-light hover:text-team-secondary smooth-transition italic"
           >
             contact@frc6988.com
           </a>
         </div>
 
-        <div class="space-y-2">
-          <div class="flex items-center gap-2">
+        <!-- Location Status Box -->
+        <div class="flex flex-col gap-2 p-5 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-md smooth-transition hover:border-team-secondary/40 hover:bg-white/10">
+          <div class="flex items-center gap-2 text-team-secondary select-none">
             <svg
-              class="h-4 w-4 shrink-0 text-team-secondary"
+              class="h-3.5 w-3.5 shrink-0"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              stroke-width="2.5"
               stroke="currentColor"
               aria-hidden="true"
             >
@@ -67,24 +65,23 @@ const inputClass =
                 d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
               ></path>
             </svg>
-            <p
-              class="text-sm font-semibold uppercase tracking-wider text-team-secondary"
-            >
-              Location
-            </p>
+            <span class="text-[9px] font-black tracking-[0.2em] uppercase">HEADQUARTERS // LOCATION</span>
           </div>
-          <p class="pl-6 text-lg text-team-light/90">Your School / City, State</p>
+          <p class="text-base md:text-lg font-black tracking-tight text-team-light select-none italic">
+            Your School / City, State
+          </p>
         </div>
       </div>
     </div>
 
+    <!-- Right Column Glass Telemetry Panel -->
     <div
-      class="rounded-2xl border border-team-tertiary-800/50 bg-team-dark/40 p-8 shadow-xl shadow-team-dark/50 backdrop-blur-sm"
+      class="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 shadow-[0_12px_40px_rgba(0,0,0,0.25)] backdrop-blur-2xl"
     >
-      <form class="space-y-6" action="#" method="post">
+      <form class="space-y-5" action="#" method="post">
         <div>
-          <label for="name" class="mb-2 block text-sm font-medium text-team-light/80">
-            Name
+          <label for="name" class="mb-2 block text-[9px] font-black tracking-widest text-team-light/65 uppercase select-none">
+            Sender Name
           </label>
           <input
             type="text"
@@ -97,8 +94,8 @@ const inputClass =
         </div>
 
         <div>
-          <label for="email" class="mb-2 block text-sm font-medium text-team-light/80">
-            Email
+          <label for="email" class="mb-2 block text-[9px] font-black tracking-widest text-team-light/65 uppercase select-none">
+            Response Email
           </label>
           <input
             type="email"
@@ -113,14 +110,14 @@ const inputClass =
         <div>
           <label
             for="message"
-            class="mb-2 block text-sm font-medium text-team-light/80"
+            class="mb-2 block text-[9px] font-black tracking-widest text-team-light/65 uppercase select-none"
           >
-            Message
+            Telemetry Message
           </label>
           <textarea
             id="message"
             name="message"
-            rows="5"
+            rows="4"
             required
             class={`${inputClass} resize-y`}
             placeholder="How can we help?"></textarea>
@@ -128,7 +125,7 @@ const inputClass =
 
         <button
           type="submit"
-          class="w-full rounded-xl bg-gradient-to-r from-team-primary to-team-accent px-6 py-3 font-bold text-team-light shadow-xl shadow-team-dark/50 transition-all duration-500 ease-out hover:-translate-y-1 hover:from-team-primary-600 hover:to-team-accent-400 sm:w-auto"
+          class="w-full rounded-full border border-white/15 bg-team-secondary px-8 py-3.5 text-[10px] font-black tracking-widest uppercase text-team-light shadow-xl smooth-transition hover:bg-team-secondary/80 hover:scale-105 hover:border-white/30 hover:shadow-[0_0_20px_rgba(38,158,135,0.4)] cursor-pointer text-center sm:w-auto"
         >
           Send Message
         </button>

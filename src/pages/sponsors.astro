@@ -1,0 +1,181 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+
+const platinumSponsors = [
+  { name: 'TITAN INDUSTRIES', logoText: 'TITAN // IND', glow: 'rgba(38,158,135,0.5)' },
+  { name: 'NEBULA AEROSPACE', logoText: 'NEBULA // AERO', glow: 'rgba(24,20,186,0.5)' },
+];
+
+const goldSponsors = [
+  { name: 'Cyberdyne Systems', logoText: 'CYBERDYNE', glow: 'rgba(245,158,11,0.3)' },
+  { name: 'Omni Consumer Products', logoText: 'OMNI // CP', glow: 'rgba(38,158,135,0.3)' },
+  { name: 'Apex Systems', logoText: 'APEX', glow: 'rgba(24,20,186,0.3)' },
+];
+
+const silverSponsors = ['Helix Laboratories', 'Volt Dynamics', 'Nexus Software', 'Summit Tools'];
+const bronzeSponsors = ['Echo Technologies', 'Starlight Energy', 'Pinnacle Metals', 'Delta Foundry', 'Quantum Computing Corp'];
+
+const benefits = [
+  { title: 'Robot Branding', desc: 'Prominent logo placement on our active FRC competition robot, showcased at regional and world championship events.' },
+  { title: 'Apparel Showcase', desc: 'Sponsor logo featured on official team shirts, hoodies, and pit banners worn by 50+ members.' },
+  { title: 'Digital Spotlight', desc: 'Dedicated logo placement on our homepage, projects repository, and active social media channels.' },
+  { title: 'Outreach Invites', desc: 'Exclusive VIP invitations to our community STEM workshops, school exhibitions, and competition pits.' },
+];
+---
+
+<Layout>
+  <Navbar />
+
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 overflow-hidden bg-team-dark">
+    <!-- Deep grid & overlay -->
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_40%,transparent_100%)] pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-team-accent/10 rounded-full blur-[120px] pointer-events-none" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto max-w-7xl px-4 text-center">
+      <span class="text-[9px] md:text-[10px] font-black tracking-[0.4em] text-team-accent uppercase">
+        FUELING STEM INNOVATION
+      </span>
+      <h1 class="mt-4 text-4xl font-black tracking-tighter text-team-light md:text-7xl uppercase italic">
+        OUR SPONSORS
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-xs md:text-sm leading-relaxed text-team-light/65 uppercase tracking-wider">
+        Our achievements are made possible through the generous support of our corporate partners, local businesses, and academic foundations. Join us in cultivating the engineers of tomorrow.
+      </p>
+    </div>
+  </section>
+
+  <!-- Platinum Sponsors -->
+  <section class="relative mx-auto max-w-5xl px-4 py-16">
+    <SectionHeader title="PLATINUM PARTNERS // 6988" />
+    
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 mt-12">
+      {platinumSponsors.map((sponsor) => (
+        <div 
+          class="relative group rounded-3xl border-2 border-white/10 bg-gradient-to-br from-white/10 to-transparent p-12 text-center backdrop-blur-2xl smooth-transition hover:border-team-secondary/50 hover:-translate-y-2 flex flex-col justify-center items-center h-48"
+          style={`box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);`}
+        >
+          <!-- Radiant outline glow -->
+          <div class="absolute inset-0 rounded-3xl opacity-30 group-hover:opacity-100 smooth-transition pointer-events-none" style={`box-shadow: 0 0 40px ${sponsor.glow};`}></div>
+          
+          <span class="text-xs font-black tracking-[0.3em] text-team-secondary uppercase mb-2 select-none">
+            PLATINUM LEVEL
+          </span>
+          <h3 class="text-xl md:text-3xl font-black tracking-tighter text-team-light uppercase italic">
+            {sponsor.logoText}
+          </h3>
+          <p class="text-[10px] font-bold text-team-light/45 uppercase tracking-widest mt-2">
+            {sponsor.name}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Gold Sponsors -->
+  <section class="relative mx-auto max-w-5xl px-4 py-16 border-t border-white/5">
+    <SectionHeader title="GOLD PARTNERS" />
+
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-3 mt-12">
+      {goldSponsors.map((sponsor) => (
+        <div 
+          class="relative group rounded-2xl border border-white/5 bg-white/5 p-8 text-center backdrop-blur-md smooth-transition hover:border-team-accent/40 hover:-translate-y-1 flex flex-col justify-center items-center h-36"
+        >
+          <!-- Outline glow -->
+          <div class="absolute inset-0 rounded-2xl opacity-10 group-hover:opacity-80 smooth-transition pointer-events-none" style={`box-shadow: 0 0 25px ${sponsor.glow};`}></div>
+
+          <span class="text-[9px] font-black tracking-[0.25em] text-team-accent uppercase mb-1 select-none">
+            GOLD LEVEL
+          </span>
+          <h4 class="text-lg md:text-xl font-black tracking-tight text-team-light uppercase italic">
+            {sponsor.logoText}
+          </h4>
+          <p class="text-[9px] font-bold text-team-light/40 uppercase tracking-wider mt-1.5">
+            {sponsor.name}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Silver & Bronze Sponsors -->
+  <section class="relative mx-auto max-w-5xl px-4 py-16 border-t border-white/5">
+    <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+      <!-- Silver Tier -->
+      <div>
+        <SectionHeader title="SILVER PARTNERS" />
+        <ul class="grid grid-cols-2 gap-4 mt-8">
+          {silverSponsors.map((sponsor) => (
+            <li class="rounded-xl border border-white/5 bg-white/5 p-4 text-center text-xs font-bold text-team-light/75 uppercase tracking-wider hover:border-white/15 smooth-transition select-none">
+              {sponsor}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Bronze Tier -->
+      <div>
+        <SectionHeader title="BRONZE PARTNERS" />
+        <ul class="grid grid-cols-2 gap-4 mt-8">
+          {bronzeSponsors.map((sponsor) => (
+            <li class="rounded-xl border border-white/5 bg-white/5 p-4 text-center text-[10px] font-bold text-team-light/60 uppercase tracking-widest hover:border-white/10 smooth-transition select-none">
+              {sponsor}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Become a Sponsor Call to Action -->
+  <section class="relative mx-auto max-w-4xl px-4 py-20 border-t border-white/5">
+    <div class="relative rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12 shadow-[0_12px_40px_rgba(0,0,0,0.3)] backdrop-blur-2xl text-center overflow-hidden">
+      <div class="absolute -top-12 -left-12 w-24 h-24 bg-team-accent/20 rounded-full blur-xl pointer-events-none"></div>
+
+      <span class="text-[9px] font-black tracking-[0.25em] text-team-accent uppercase mb-4 block">
+        PARTNERSHIP SCHEME // BECOME A SPONSOR
+      </span>
+      <h2 class="text-xl md:text-3xl font-black tracking-tighter text-team-light uppercase italic mb-6">
+        FUEL OUR MISSION
+      </h2>
+      <p class="text-xs md:text-sm leading-relaxed text-team-light/75 mb-10 max-w-2xl mx-auto">
+        Join our network of sponsors helping Wildbyte engineer competitive robots, purchase raw materials (filaments, CNC plates, Kraken motors), and run community accessibility camps. See how your organization benefits.
+      </p>
+
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 text-left mb-10">
+        {benefits.map((benefit) => (
+          <div class="rounded-xl border border-white/5 bg-white/5 p-4">
+            <h4 class="text-xs font-black text-team-accent uppercase tracking-widest mb-1.5 italic">
+              {benefit.title}
+            </h4>
+            <p class="text-[10px] leading-relaxed text-team-light/60">
+              {benefit.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+        <a 
+          href="#"
+          class="w-full sm:w-auto rounded-full border border-white/15 bg-team-accent/90 px-8 py-3.5 text-[10px] font-black tracking-widest uppercase text-team-light shadow-xl smooth-transition hover:bg-team-accent hover:scale-105 hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] cursor-pointer text-center"
+        >
+          Download Brochure
+        </a>
+        <a 
+          href="#contact"
+          class="w-full sm:w-auto rounded-full border border-white/10 bg-white/5 px-8 py-3.5 text-[10px] font-black tracking-widest uppercase text-team-light smooth-transition hover:bg-white/10 hover:border-team-accent/40 cursor-pointer text-center"
+        >
+          Partner with Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Contact />
+  <Footer />
+</Layout>

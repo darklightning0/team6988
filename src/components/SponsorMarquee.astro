@@ -3,54 +3,62 @@ import SectionHeader from './SectionHeader.astro';
 
 const sponsors = Array.from(
   { length: 14 },
-  (_, i) => `/sponsor_logos/${i + 1}.png`,
+  (_, i) => `/team6988/sponsor_logos/${i + 1}.png`,
 );
 
-const logoLinkClass = 'inline-flex items-center';
+const logoLinkClass = 'inline-flex items-center justify-center shrink-0 px-8';
 
 const logoImgClass =
-  'h-20 w-auto object-contain transition-transform duration-300 hover:scale-110 md:h-28';
+  'h-12 w-auto object-contain opacity-95 hover:opacity-100 hover:scale-105 smooth-transition md:h-16 select-none pointer-events-none';
 ---
 
-<section class="w-full bg-team-light px-4 pb-16 pt-12">
+<section class="w-full bg-team-light px-4 py-24 relative overflow-hidden">
   <SectionHeader title="SPONSORED BY" tone="dark" />
 
-  <div
-    class="marquee-outer relative flex w-full overflow-hidden whitespace-nowrap"
-  >
+  <!-- Widened container to 7xl (spanning near page borders) -->
+  <div class="relative mx-auto w-[96%] md:w-[94%] max-w-7xl">
+    <!-- Edge dissolving gradients pushed right to the borders (improved widths for smoother fading to center) -->
+    <div class="absolute inset-y-0 left-0 w-24 md:w-72 bg-gradient-to-r from-team-light via-team-light/60 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute inset-y-0 right-0 w-24 md:w-72 bg-gradient-to-l from-team-light via-team-light/60 to-transparent z-10 pointer-events-none"></div>
+
+    <!-- Frosted Glass Pill Marquee Frame -->
     <div
-      class="marquee-track flex min-w-full shrink-0 items-center justify-around gap-16 px-8"
+      class="marquee-outer relative flex w-full overflow-hidden whitespace-nowrap rounded-3xl md:rounded-full border border-black/5 bg-white/40 p-4 md:p-6 shadow-[0_8px_30px_rgba(0,0,0,0.03)] backdrop-blur-xl"
     >
-      {
-        sponsors.map((src) => (
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            class={logoLinkClass}
-          >
-            <img src={src} alt="Sponsor logo" class={logoImgClass} loading="lazy" />
-          </a>
-        ))
-      }
-    </div>
-    <div
-      class="marquee-track flex min-w-full shrink-0 items-center justify-around gap-16 px-8"
-      aria-hidden="true"
-    >
-      {
-        sponsors.map((src) => (
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            tabindex="-1"
-            class={logoLinkClass}
-          >
-            <img src={src} alt="" class={logoImgClass} loading="lazy" />
-          </a>
-        ))
-      }
+      <div
+        class="marquee-track flex min-w-full shrink-0 items-center justify-around"
+      >
+        {
+          sponsors.map((src) => (
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class={logoLinkClass}
+            >
+              <img src={src} alt="Sponsor logo" class={logoImgClass} loading="lazy" />
+            </a>
+          ))
+        }
+      </div>
+      <div
+        class="marquee-track flex min-w-full shrink-0 items-center justify-around"
+        aria-hidden="true"
+      >
+        {
+          sponsors.map((src) => (
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              tabindex="-1"
+              class={logoLinkClass}
+            >
+              <img src={src} alt="" class={logoImgClass} loading="lazy" />
+            </a>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
@@ -66,7 +74,7 @@ const logoImgClass =
   }
 
   .marquee-track {
-    animation: marquee 15s linear infinite;
+    animation: marquee 25s linear infinite;
   }
 
   .marquee-outer:hover .marquee-track {

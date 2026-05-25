@@ -1,0 +1,176 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+
+const quickStats = [
+  { label: 'BATTERY SYSTEMS', value: '12V SLA Heavy-Duty FRC Standard' },
+  { label: 'CANBUS NETWORK', value: '1 Mbps High-Speed CAN FD Backbone' },
+  { label: 'CHASSIS WEIGHT', value: '120 lbs (Dry) // 142 lbs (Bumper & Battery)' },
+  { label: 'DRIVE ENCODERS', value: 'CANcoder High-Resolution Absolute Sensors' },
+];
+
+const subsystems = [
+  {
+    title: 'Drivebase Kinematics',
+    specs: [
+      { name: 'Motorization', value: '8x Kraken X60 Brushless Motors' },
+      { name: 'Swerve Modules', value: '4x SDS MK5i (L2 Gearing, Lighter weight)' },
+      { name: 'Maximum Speed', value: '16.5 ft/s (5.03 m/s) Theoretical Max' },
+      { name: 'Chassis Frame', value: '25x50mm pocketed 6061-T6 Aluminum extrusions' },
+    ],
+    details: 'Constructed from lightweight, precision CNC machined aluminum, the drivebase is optimized to withstand massive collisions. A central carbon-fiber pockets belly pan keeps electronics safe and dust-free.',
+  },
+  {
+    title: 'Intake Acquisition',
+    specs: [
+      { name: 'Arm Actuation', value: '1x Kraken X60 with 9.18:1 planetary gear' },
+      { name: 'Roller Motor', value: '1x Falcon 500 direct-drive' },
+      { name: 'Acquisition Roller', value: 'Grip-tape enhanced Delrin core' },
+      { name: 'Hard Stops', value: 'Custom 3D-printed TPU shock-absorbers' },
+    ],
+    details: 'Features an active deployment arm guided by closed-loop absolute encoders that snap and hold the intake at optimal collection angles. The arm is structurally reinforced to survive intake-down field collisions.',
+  },
+  {
+    title: 'Active Floor Hopper',
+    specs: [
+      { name: 'Hopper Belts', value: '10x 565mm timing belts creating active floor' },
+      { name: 'Belt Drive', value: 'Dual Neo 550 brushless motors' },
+      { name: 'Side Panels', value: '1/8 inch impact-resistant Polycarbonate sheets' },
+      { name: 'Funneling Guides', value: '3D-printed directional walls (Panther Eye)' },
+    ],
+    details: 'Designed to eliminate mechanical game piece jamming. The active timing belt floor drives up to 60 game pieces aggressively toward the shooter throat, leaving zero dead zones.',
+  },
+  {
+    title: 'Vision Shooter',
+    specs: [
+      { name: 'Shooter Motors', value: '2x Falcon 500 in closed-loop velocity PID' },
+      { name: 'Flywheels', value: 'Dual stacks, ten 4-inch neoprene wheels' },
+      { name: 'Agitator Drive', value: '1x Neo 550 brushless motor' },
+      { name: 'Targeting Locks', value: 'Twin Limelight 4 with AprilTag pipeline' },
+    ],
+    details: 'A high-velocity shooter capable of launching game pieces from anywhere on the field. Vision algorithms lock onto AprilTags and automatically calculate flywheels RPM and alignment angles.',
+  },
+];
+---
+
+<Layout>
+  <Navbar />
+
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-16 overflow-hidden bg-team-dark">
+    <!-- Deep grid & overlay -->
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_40%,transparent_100%)] pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-team-secondary/10 rounded-full blur-[120px] pointer-events-none" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto max-w-7xl px-4 text-center select-none">
+      <span class="text-[9px] md:text-[10px] font-black tracking-[0.4em] text-team-secondary uppercase">
+        TECHNICAL SPECIFICATIONS // BLUEPRINT DATA
+      </span>
+      <h1 class="mt-4 text-4xl font-black tracking-tighter text-team-light md:text-7xl uppercase italic">
+        SPARKY SPECIFICATIONS
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-xs md:text-sm leading-relaxed text-team-light/65 uppercase tracking-wider">
+        Explore the granular mechanical details, electrical backbones, and subsystem specifications of our 2026 FIRST Robotics Competition machine.
+      </p>
+    </div>
+  </section>
+
+  <!-- Quick Telemetry Dashboard -->
+  <section class="relative mx-auto max-w-7xl px-4 pb-16">
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+      {quickStats.map((stat) => (
+        <div class="rounded-xl border border-white/5 bg-white/5 p-5 text-left backdrop-blur-md">
+          <span class="text-[8px] font-black tracking-widest text-team-light/40 uppercase block">
+            {stat.label}
+          </span>
+          <span class="text-xs font-bold text-team-secondary uppercase tracking-wider block mt-1 select-none">
+            {stat.value}
+          </span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Subsystems Breakdown -->
+  <section class="relative mx-auto max-w-6xl px-4 py-16 border-t border-white/5">
+    <SectionHeader title="SUBSYSTEM MECHANICAL DETAILS" />
+
+    <div class="space-y-12 mt-12">
+      {subsystems.map((system) => (
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.15)] flex flex-col md:flex-row gap-8 items-start">
+          
+          <!-- Specifications list -->
+          <div class="w-full md:w-1/2 space-y-4">
+            <h3 class="text-lg md:text-xl font-black tracking-tight text-team-secondary uppercase italic select-none">
+              {system.title}
+            </h3>
+            
+            <div class="space-y-2">
+              {system.specs.map((spec) => (
+                <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                  <span class="text-[9px] font-black tracking-wider text-team-light/40 uppercase">
+                    {spec.name}
+                  </span>
+                  <span class="text-[11px] font-bold text-team-light uppercase tracking-wide text-right">
+                    {spec.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Description paragraph -->
+          <div class="w-full md:w-1/2 flex flex-col justify-between h-full space-y-4">
+            <div>
+              <span class="text-[8px] font-black tracking-widest text-team-light/30 uppercase block mb-1">
+                ENGINEERING LOGS
+              </span>
+              <p class="text-xs leading-relaxed text-team-light/65">
+                {system.details}
+              </p>
+            </div>
+            
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between text-[8px] font-black tracking-widest text-team-light/35 uppercase select-none">
+              <span>STATUS: LOCKED IN CAD</span>
+              <span class="text-team-secondary">MODEL ID: 6988-26</span>
+            </div>
+          </div>
+
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 3D Printing & Materials Spotlight -->
+  <section class="relative mx-auto max-w-4xl px-4 py-16 border-t border-white/5">
+    <div class="relative rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12 shadow-[0_12px_40px_rgba(0,0,0,0.3)] backdrop-blur-2xl text-center overflow-hidden">
+      <!-- Glow effect inside -->
+      <div class="absolute -bottom-12 -left-12 w-24 h-24 bg-team-secondary/20 rounded-full blur-xl pointer-events-none"></div>
+
+      <span class="text-[9px] font-black tracking-[0.25em] text-team-secondary uppercase mb-4 block">
+        RAPID PROTOTYPING // MANUFACTURING INTEGRATION
+      </span>
+      <h2 class="text-xl md:text-3xl font-black tracking-tighter text-team-light uppercase italic mb-6">
+        BAMBU LAB P1S 3D PRINTING
+      </h2>
+      <p class="text-xs md:text-sm leading-relaxed text-team-light/75 mb-8 max-w-2xl mx-auto">
+        Wildbyte pushes manufacturing limits by integrating functional 3D printed components directly onto our competition machine. Leveraging our Bambu Lab P1S systems, we print carbon fiber reinforced nylon (PA-CF) for high-impact mounting blocks, tough PETG for hopper funneling sheets, and soft flexible TPU for grip agitator wheels.
+      </p>
+
+      <div class="flex justify-center">
+        <a 
+          href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/robots/technical-binder`}
+          class="rounded-full border border-white/15 bg-team-secondary px-8 py-3.5 text-[10px] font-black tracking-widest uppercase text-team-light shadow-xl smooth-transition hover:bg-team-secondary/85 hover:scale-105 hover:shadow-[0_0_20px_rgba(38,158,135,0.45)] cursor-pointer text-center"
+        >
+          Launch Interactive 3D CAD Binder
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Contact />
+  <Footer />
+</Layout>

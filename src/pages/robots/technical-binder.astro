@@ -135,7 +135,7 @@ import Layout from '../../layouts/Layout.astro';
               ASSEMBLY
             </button>
             <button data-target="NAUO289" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
-              DRIVETRAIN
+              DRIVEBASE
             </button>
             <button data-target="NAUO861" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
               INTAKE
@@ -351,7 +351,7 @@ import Layout from '../../layouts/Layout.astro';
             </div>
 
             <div class="flex-shrink-0 flex items-center justify-center">
-              <svg onclick="scrollToSoftware()" class="w-6 h-6 md:w-8 md:h-8 text-team-brand-accent cursor-pointer animate-pulse-glow hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg onclick="scrollToTeam()" class="w-6 h-6 md:w-8 md:h-8 text-team-brand-accent cursor-pointer animate-pulse-glow hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
               </svg>
             </div>
@@ -370,7 +370,7 @@ import Layout from '../../layouts/Layout.astro';
 
       </section>
 
-      <section class="min-h-screen dvh-min-screen w-full relative bg-team-light flex flex-col items-center pt-16 md:pt-24 pb-8 md:pb-12 px-4 md:px-8">
+      <section class="min-h-screen dvh-min-screen w-full relative bg-team-light flex flex-col items-center justify-center py-16 px-4 md:px-8 overflow-y-auto">
         
         <div class="absolute top-6 md:top-10 left-1/2 transform -translate-x-1/2 z-50">
           <svg onclick="scrollToCAD()" class="w-8 h-8 md:w-10 md:h-10 text-team-brand-accent cursor-pointer animate-pulse-glow hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -378,23 +378,140 @@ import Layout from '../../layouts/Layout.astro';
           </svg>
         </div>
 
-        <div class="max-w-5xl w-full mx-auto mt-8 md:mt-12">
-          <h3 class="text-xs md:text-sm font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-2 text-center">Beyond the Hardware</h3>
-          <h2 class="text-2xl md:text-3xl lg:text-5xl font-black tracking-tighter text-gray-900 mb-4 md:mb-8 lg:mb-12 uppercase italic text-center">Software Architecture</h2>
+        <div class="max-w-5xl w-full mx-auto flex flex-col items-center">
+          <h3 class="text-xs md:text-sm font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-3 text-center">
+            MEET THE MINDS BEHIND THE MACHINE
+          </h3>
           
-          <p class="text-sm md:text-lg leading-relaxed text-gray-600 mb-6 md:mb-12 max-w-3xl">
-            With the mechanics completely locked in, the focus shifts to autonomous pathing, AprilTag odometry pipelines, and closed-loop control systems powered by WPILib.
-          </p>
+          <div class="flex flex-col items-center justify-center text-center mt-2 mb-10 select-none">
+            <h1 class="text-7xl sm:text-8xl md:text-[8rem] lg:text-[10rem] font-black tracking-tighter text-gray-900 uppercase italic leading-none select-none filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+              ACI35
+            </h1>
+            <h1 class="text-6xl sm:text-7xl md:text-[6.5rem] lg:text-[8rem] font-black tracking-tighter text-team-brand-accent uppercase italic leading-none select-none filter drop-shadow-[0_4px_12px_rgba(var(--accent-color-rgb),0.15)] -mt-1 md:-mt-3">
+              6988
+            </h1>
+          </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-            <div class="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 border border-team-light-200/50 shadow-sm hover:shadow-md transition-shadow">
-              <h4 class="text-lg md:text-xl font-black italic uppercase text-gray-900 mb-3 md:mb-4">Vision Pipeline</h4>
-              <p class="text-xs md:text-sm text-gray-600 leading-relaxed">Odometry...</p>
-            </div>
-            <div class="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 border border-team-light-200/50 shadow-sm hover:shadow-md transition-shadow">
-              <h4 class="text-lg md:text-xl font-black italic uppercase text-gray-900 mb-3 md:mb-4">Autonomous Routines</h4>
-              <p class="text-xs md:text-sm text-gray-600 leading-relaxed">Trajectories...</p>
-            </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 w-full px-2">
+            
+            <!-- WEBPAGE -->
+            <a 
+              href="https://frc6988.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="group flex flex-col items-center justify-center p-5 md:p-6 bg-white border border-gray-100/80 rounded-2xl md:rounded-3xl shadow-sm hover:shadow-xl hover:border-team-brand-accent/30 transition-all duration-300 transform hover:-translate-y-1 select-none text-center w-full"
+            >
+              <div class="p-3.5 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl text-gray-400 group-hover:text-team-brand-accent group-hover:bg-team-brand-accent/5 transition-colors duration-300">
+                <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                </svg>
+              </div>
+              <span class="mt-4 text-[11px] md:text-[13px] font-black tracking-widest text-gray-500 uppercase group-hover:text-gray-900 transition-colors duration-300">
+                Webpage
+              </span>
+              <span class="mt-1 text-[8px] md:text-[10px] font-bold text-gray-400 lowercase truncate max-w-full">
+                frc6988.com
+              </span>
+            </a>
+
+            <!-- INSTAGRAM -->
+            <a 
+              href="https://www.instagram.com/frc_aci35" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="group flex flex-col items-center justify-center p-5 md:p-6 bg-white border border-gray-100/80 rounded-2xl md:rounded-3xl shadow-sm hover:shadow-xl hover:border-team-brand-accent/30 transition-all duration-300 transform hover:-translate-y-1 select-none text-center w-full"
+            >
+              <div class="p-3.5 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl text-gray-400 group-hover:text-team-brand-accent group-hover:bg-team-brand-accent/5 transition-colors duration-300">
+                <svg class="w-6 h-6 md:w-8 md:h-8" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path>
+                </svg>
+              </div>
+              <span class="mt-4 text-[11px] md:text-[13px] font-black tracking-widest text-gray-500 uppercase group-hover:text-gray-900 transition-colors duration-300">
+                Instagram
+              </span>
+              <span class="mt-1 text-[8px] md:text-[10px] font-bold text-gray-400 lowercase truncate max-w-full">
+                @frc_aci35
+              </span>
+            </a>
+
+            <!-- LINKTREE -->
+            <a 
+              href="https://linktr.ee/FRC6988" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="group flex flex-col items-center justify-center p-5 md:p-6 bg-white border border-gray-100/80 rounded-2xl md:rounded-3xl shadow-sm hover:shadow-xl hover:border-team-brand-accent/30 transition-all duration-300 transform hover:-translate-y-1 select-none text-center w-full"
+            >
+              <div class="p-3.5 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl text-gray-400 group-hover:text-team-brand-accent group-hover:bg-team-brand-accent/5 transition-colors duration-300">
+                <svg class="w-6 h-6 md:w-8 md:h-8" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="m21.879 17.914-5.061-4.5H19.5v-1.125h-5.062v-2.25H16.875V8.914l-3.375-3V3H10.5v2.914l-3.375 3v1.125h2.25v2.25H4.5v1.125h2.682l-5.061 4.5.679.761 4.213-3.746v4.613H4.5V21h15v-1.125h-2.506v-4.613l4.213 3.746.672-.762Z"/>
+                </svg>
+              </div>
+              <span class="mt-4 text-[11px] md:text-[13px] font-black tracking-widest text-gray-500 uppercase group-hover:text-gray-900 transition-colors duration-300">
+                Linktree
+              </span>
+              <span class="mt-1 text-[8px] md:text-[10px] font-bold text-gray-400 lowercase truncate max-w-full">
+                frc6988
+              </span>
+            </a>
+
+            <!-- TIKTOK -->
+            <a 
+              href="https://www.tiktok.com/@6988aci35" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="group flex flex-col items-center justify-center p-5 md:p-6 bg-white border border-gray-100/80 rounded-2xl md:rounded-3xl shadow-sm hover:shadow-xl hover:border-team-brand-accent/30 transition-all duration-300 transform hover:-translate-y-1 select-none text-center w-full"
+            >
+              <div class="p-3.5 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl text-gray-400 group-hover:text-team-brand-accent group-hover:bg-team-brand-accent/5 transition-colors duration-300">
+                <svg class="w-6 h-6 md:w-8 md:h-8" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.99-1.72-.08-.07-.17-.17-.24-.25v5.13c.02 3.16-1.58 6.36-4.65 7.42-3.18 1.18-7.05-.34-8.48-3.39-1.63-3.23-.27-7.79 3.32-9.17 1.07-.44 2.24-.55 3.37-.4v3.91c-.98-.24-2.07-.11-2.93.42-.98.59-1.47 1.76-1.39 2.89.06 1.48 1.34 2.8 2.85 2.79 1.62-.02 2.94-1.42 2.94-3.04V.02h.02z"/>
+                </svg>
+              </div>
+              <span class="mt-4 text-[11px] md:text-[13px] font-black tracking-widest text-gray-500 uppercase group-hover:text-gray-900 transition-colors duration-300">
+                TikTok
+              </span>
+              <span class="mt-1 text-[8px] md:text-[10px] font-bold text-gray-400 lowercase truncate max-w-full">
+                @6988aci35
+              </span>
+            </a>
+
+            <!-- SPOTIFY -->
+            <a 
+              href="https://open.spotify.com/user/31osveptcnopunos4rewhb3npyyi?si=K4nN-X2VRnCCx58JOt9deA&nd=1&dlsi=8d6d68c75e094595" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="group flex flex-col items-center justify-center p-5 md:p-6 bg-white border border-gray-100/80 rounded-2xl md:rounded-3xl shadow-sm hover:shadow-xl hover:border-team-brand-accent/30 transition-all duration-300 transform hover:-translate-y-1 select-none text-center w-full"
+            >
+              <div class="p-3.5 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl text-gray-400 group-hover:text-team-brand-accent group-hover:bg-team-brand-accent/5 transition-colors duration-300">
+                <svg class="w-6 h-6 md:w-8 md:h-8" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.3-.6.4-.9.2-2.8-1.7-6.2-2.1-10.3-1.1-.3.1-.7-.1-.8-.4-.1-.3.1-.7.4-.8 4.5-1 8.3-.6 11.4 1.3.3.1.4.5.2.8zm1.5-3.3c-.3.4-.8.5-1.2.3-3.2-2-8-2.5-11.7-1.4-.5.1-1-.2-1.1-.7-.1-.5.2-1 .7-1.1 4.2-1.3 9.6-.7 13.3 1.6.4.2.5.8.3 1.3zM19.1 10c-.3.5-1 .7-1.5.4-3.8-2.3-9.6-2.5-13-.5-.6.2-1.2-.2-1.4-.7-.2-.6.2-1.2.7-1.4 3.9-1.2 10.3-.9 14.7 1.8.5.2.7.9.5 1.4z"/>
+                </svg>
+              </div>
+              <span class="mt-4 text-[11px] md:text-[13px] font-black tracking-widest text-gray-500 uppercase group-hover:text-gray-900 transition-colors duration-300">
+                Spotify
+              </span>
+              <span class="mt-1 text-[8px] md:text-[10px] font-bold text-gray-400 lowercase truncate max-w-full">
+                ACI35 Profile
+              </span>
+            </a>
+
+            <!-- MAIL -->
+            <a 
+              href="mailto:frc6988@my.aci.k12.tr" 
+              class="group flex flex-col items-center justify-center p-5 md:p-6 bg-white border border-gray-100/80 rounded-2xl md:rounded-3xl shadow-sm hover:shadow-xl hover:border-team-brand-accent/30 transition-all duration-300 transform hover:-translate-y-1 select-none text-center w-full"
+            >
+              <div class="p-3.5 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl text-gray-400 group-hover:text-team-brand-accent group-hover:bg-team-brand-accent/5 transition-colors duration-300">
+                <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <span class="mt-4 text-[11px] md:text-[13px] font-black tracking-widest text-gray-500 uppercase group-hover:text-gray-900 transition-colors duration-300">
+                Contact
+              </span>
+              <span class="mt-1 text-[8px] md:text-[10px] font-bold text-gray-400 lowercase truncate max-w-full">
+                frc6988@my.aci.k12.tr
+              </span>
+            </a>
+
           </div>
         </div>
 
@@ -405,7 +522,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <script is:inline>
     // --- SCROLL NAVIGATION LOGIC ---
-    function scrollToSoftware() {
+    function scrollToTeam() {
       document.getElementById('slide-track').style.transform = 'translateY(-100dvh)';
     }
 

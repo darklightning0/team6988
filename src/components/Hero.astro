@@ -1,22 +1,31 @@
 <section
-  class="relative flex h-screen flex-col items-center justify-center overflow-hidden bg-[url('/hero_image.webp')] bg-cover bg-center"
+  class="relative flex h-screen flex-col items-center justify-between pt-32 pb-16 md:pb-24 overflow-hidden bg-[url('/team6988/hero_image.webp')] bg-cover bg-center bg-team-dark"
 >
-  <div class="absolute inset-0 bg-team-dark/60" aria-hidden="true"></div>
+  <!-- Deep dark overlays to align with the team-dark theme -->
+  <div class="absolute inset-0 bg-team-dark/75" aria-hidden="true"></div>
   <div
-    class="absolute inset-0 bg-gradient-to-b from-team-dark/40 via-transparent to-team-dark/80"
+    class="absolute inset-0 bg-gradient-to-b from-team-dark/30 via-transparent to-team-dark"
     aria-hidden="true"
   ></div>
 
-  <div class="relative z-10 flex w-full flex-col items-center gap-6 px-4 text-center sm:px-6">
+  <!-- CAD HUD Grid Overlay (Highly visual premium technical binder aesthetic) -->
+  <div 
+    class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_40%,transparent_100%)] pointer-events-none"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Upper Content: Pulse Logo & FRC text located beautifully ABOVE the middle of the screen -->
+  <div class="relative z-10 flex flex-col items-center gap-4 px-4 text-center sm:px-6 select-none">
+    <!-- Neon Glowing Crest -->
     <div
-      class="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-team-tertiary to-team-secondary shadow-xl shadow-team-dark/50"
+      class="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl animate-pulse-glow smooth-transition hover:scale-105"
       aria-label="Panther logo placeholder"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
-        class="h-14 w-14 text-team-light"
+        class="h-8 w-8 text-team-secondary"
       >
         <path
           fill-rule="evenodd"
@@ -25,21 +34,36 @@
       </svg>
     </div>
 
+    <!-- Category Label (Renamed team name to Wildbyte) -->
+    <span class="text-[9px] md:text-[10px] font-bold tracking-[0.35em] text-team-secondary uppercase mt-1">
+      FIRST ROBOTICS COMPETITION // FRC WILDBYTE
+    </span>
+  </div>
+
+  <!-- Lower Content: Main Brand, Tagline & CTA shifted to the bottom third to protect focus point -->
+  <div class="relative z-10 flex w-full flex-col items-center gap-4 px-4 text-center sm:px-6">
+    <!-- High Impact Display Title (Renamed team name to Wildbyte) -->
     <h1
-      class="w-full text-5xl font-extrabold tracking-tight text-team-light md:text-8xl"
+      class="w-full text-5xl font-black tracking-tighter text-team-light md:text-8xl uppercase italic"
     >
-      TEAM 6988
+      WILDBYTE
     </h1>
+
+    <!-- Sleek Heavy Italic Tagline -->
     <h2
-      class="max-w-xl px-2 text-xl font-medium text-team-light/90 md:px-0 md:text-3xl"
+      class="max-w-xl px-2 text-sm font-bold uppercase italic text-team-light/85 md:px-0 md:text-xl tracking-tight"
     >
       Where Instinct Meets
-      <span class="text-team-secondary">Innovation</span>
+      <span class="text-team-secondary relative inline-block">
+        Innovation
+        <span class="absolute bottom-0.5 left-0 w-full h-0.5 bg-team-secondary animate-pulse"></span>
+      </span>
     </h2>
 
+    <!-- Dynamic Glowing Call to Action Pill Button -->
     <a
       href="#about"
-      class="mt-4 rounded-xl bg-gradient-to-r from-team-tertiary to-team-secondary px-8 py-3 font-bold text-team-light shadow-xl shadow-team-dark/50 transition-all duration-500 ease-out hover:-translate-y-1 hover:from-team-secondary hover:to-team-tertiary"
+      class="mt-4 rounded-full border border-white/15 bg-white/5 backdrop-blur-md px-8 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest text-team-light shadow-xl smooth-transition hover:bg-white/15 hover:scale-105 hover:border-team-secondary hover:shadow-[0_0_25px_rgba(38,158,135,0.45)] cursor-pointer"
     >
       Explore the Team
     </a>

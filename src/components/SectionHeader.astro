@@ -6,12 +6,27 @@ interface Props {
 
 const { title, tone = 'light' } = Astro.props;
 
-const textColor = tone === 'dark' ? 'text-team-dark' : 'text-team-light';
+const subLabels: Record<string, string> = {
+  'EXPLORE OUR TEAM': 'FRC WILDBYTE // CORE DIVISION',
+  'SPONSORED BY': 'STRATEGIC PARTNERS // SPONSORS',
+  'GET IN TOUCH': 'CONNECT // COLLABORATE',
+};
+
+const subLabel = subLabels[title.toUpperCase()] || 'FRC WILDBYTE // SYSTEMS';
+
+const headingColor = tone === 'dark' ? 'text-team-dark' : 'text-team-light';
+const subLabelColor = tone === 'dark' ? 'text-team-tertiary-600' : 'text-team-secondary';
 ---
 
-<header class="text-center">
+<header class="text-center mb-12 md:mb-16">
+  <!-- Small Spaced Uppercase Indicator -->
+  <span class={`block text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase mb-2 ${subLabelColor}`}>
+    {subLabel}
+  </span>
+
+  <!-- Massive Block Italic Heading -->
   <h2
-    class={`mb-16 text-5xl font-black tracking-tighter md:text-6xl lg:text-7xl ${textColor}`}
+    class={`text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase italic ${headingColor}`}
   >
     {title}
   </h2>

@@ -1,0 +1,297 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+
+const robots = [
+  {
+    year: '2026',
+    name: 'SPARKY',
+    season: 'REBUILT SEASON // CHAMPIONSHIP CORE',
+    description: 'Engineered for absolute cycle speed and defensive resilience. Featuring a massive active active-belt hopper, software-controlled intake actuation, vision odometry, and high-strength 3D printed filaments.',
+    imageAlt: 'Sparky 2026 CAD Isometric',
+    specs: [
+      { label: 'DRIVETRAIN', value: '8x Kraken X60 Swerve (SDS MK5i, L2)' },
+      { label: 'WEIGHT', value: '120 lbs (Dry Weight)' },
+      { label: 'DIMENSIONS', value: '69.25 x 69.25 x 90 cm' },
+      { label: 'HOPPER CAPACITY', value: '60+ Game Pieces' },
+      { label: 'VISION HARDWARE', value: 'Twin Limelight 4 AprilTag Pipeline' },
+      { label: 'COPROCESSOR', value: 'Raspberry Pi 5 with custom OpenCV' },
+    ],
+    accentColor: '#269E87', // team-secondary
+    glow: 'rgba(38,158,135,0.4)',
+    blueprintId: 'bp-2026',
+    ctaLink: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/robots/2026`,
+  },
+  {
+    year: '2025',
+    name: 'TEMPEST',
+    season: 'CRESCENDO EVENT // DIVISION FINALIST',
+    description: 'Designed to excel in high-speed note scoring. Tempest utilized a rapid pneumatic intake arm, custom-molded silicone shooter wheels, and high-frequency elevator climbers to dominate the field.',
+    imageAlt: 'Tempest 2025 Isometric Blueprint',
+    specs: [
+      { label: 'DRIVETRAIN', value: '4x Falcon 500 Swerve (SDS MK4)' },
+      { label: 'WEIGHT', value: '118 lbs' },
+      { label: 'DIMENSIONS', value: '70.0 x 70.0 x 85 cm' },
+      { label: 'INTAKE MECHANISM', value: 'Pneumatically Actuated Roller' },
+      { label: 'VISION HARDWARE', value: 'Limelight 3 Vision Camera' },
+      { label: 'SOFTWARE BACKEND', value: 'Java WPILib Closed-Loop PID' },
+    ],
+    accentColor: '#1814BA', // team-primary
+    glow: 'rgba(24,20,186,0.4)',
+    blueprintId: 'bp-2025',
+    ctaLink: '#',
+  },
+  {
+    year: '2024',
+    name: 'LIGHTNING',
+    season: 'CHARGED UP SEASON // REGIONAL WINNER',
+    description: 'A robust chassis built for heavy impact. Featuring a dual-stage telescoping elevator arm, high-friction dual intake wheels, and absolute steel-reinforced climbing hooks.',
+    imageAlt: 'Lightning 2024 Blueprint',
+    specs: [
+      { label: 'DRIVETRAIN', value: '6x Neo Brushless West Coast Drive' },
+      { label: 'WEIGHT', value: '124 lbs' },
+      { label: 'DIMENSIONS', value: '72.0 x 72.0 x 78 cm' },
+      { label: 'ELEVATOR RANGE', value: '1.8 Meters Max Extension' },
+      { label: 'CLIMBER FORCE', value: '1200 N Dual Pneumatics' },
+      { label: 'CONTROLLER', value: 'NI roboRIO 2.0 CANbus' },
+    ],
+    accentColor: '#F59E0B', // team-accent
+    glow: 'rgba(245,158,11,0.4)',
+    blueprintId: 'bp-2024',
+    ctaLink: '#',
+  },
+];
+---
+
+<Layout>
+  <Navbar />
+
+  <!-- Hero Section with Background Video & Interactive Telemetry -->
+  <main class="relative h-[85vh] md:h-screen w-full overflow-hidden bg-team-dark flex flex-col justify-between pt-24 pb-16">
+    <!-- Looping High Tech Video Backdrop -->
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      class="absolute inset-0 w-full h-full object-cover opacity-35 z-0 pointer-events-none"
+      aria-hidden="true"
+    >
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-technology-digital-grid-loop-42861-large.mp4" type="video/mp4" />
+      <!-- Fallback source -->
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-circuit-board-with-glowing-tracks-48995-large.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Deep Grids & Color Overlays -->
+    <div class="absolute inset-0 bg-gradient-to-b from-team-dark/40 via-transparent to-team-dark z-10 pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_40%,transparent_100%)] z-10 pointer-events-none" aria-hidden="true"></div>
+    
+    <!-- Secondary glowing orb -->
+    <div class="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-team-secondary/15 rounded-full blur-[100px] pointer-events-none z-10" aria-hidden="true"></div>
+
+    <!-- Empty container to push focus layout -->
+    <div></div>
+
+    <!-- Lower Left Overlay Content -->
+    <div class="relative z-20 mx-auto w-[92%] max-w-7xl px-4 flex items-end justify-between">
+      <div class="max-w-xl text-left select-none animate-fade-in">
+        <span class="text-[9px] md:text-[10px] font-black tracking-[0.35em] text-team-secondary uppercase">
+          ACTIVE DEPLOYMENT // HANGAR OVERVIEW
+        </span>
+        <h2 class="mt-2 text-4xl md:text-6xl font-black tracking-tighter text-team-light uppercase italic">
+          2026 ROBOT: SPARKY
+        </h2>
+        <p class="mt-1 text-xs md:text-sm font-bold uppercase tracking-wider text-team-light/75">
+          LATEST REBUILT MACHINE // CYCLE CHAMPION
+        </p>
+        
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a 
+            href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/robots/technical-binder`}
+            class="rounded-full border border-white/15 bg-team-secondary px-6 py-3 text-[10px] md:text-xs font-black tracking-widest uppercase text-team-light shadow-xl smooth-transition hover:bg-team-secondary/80 hover:scale-105 hover:shadow-[0_0_20px_rgba(38,158,135,0.45)] cursor-pointer text-center"
+          >
+            Launch 3D Technical Binder
+          </a>
+          <a 
+            href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/robots/2026`}
+            class="rounded-full border border-white/10 bg-white/5 backdrop-blur-md px-6 py-3 text-[10px] md:text-xs font-black tracking-widest uppercase text-team-light smooth-transition hover:bg-white/10 hover:border-team-secondary/40 cursor-pointer text-center"
+          >
+            View Full Specs
+          </a>
+        </div>
+      </div>
+      
+      <!-- Subtle workstation indicator (Desktop only) -->
+      <div class="hidden lg:flex flex-col items-end gap-1.5 font-sans text-right select-none opacity-50">
+        <span class="text-[9px] font-black tracking-[0.25em] text-team-light uppercase">TELEMETRY SECURE</span>
+        <span class="text-[8px] font-bold text-team-light/60 uppercase">PING STATUS: 12MS // CORE: OPERATIONAL</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Yearly Robots Vertical Showcase -->
+  <section class="relative mx-auto max-w-7xl px-4 py-24 bg-team-dark z-20">
+    <SectionHeader title="THE ROBOT CHRONICLES // VERTICAL HANGAR" />
+
+    <div class="space-y-32 mt-20">
+      {robots.map((robot, index) => (
+        <div class={`flex flex-col gap-12 lg:flex-row items-center lg:gap-16 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+          
+          <!-- Robot Blueprint / Graphical Display Box -->
+          <div class="w-full lg:w-1/2 relative group select-none">
+            <!-- Neon background glow behind blueprint -->
+            <div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 smooth-transition pointer-events-none" style={`box-shadow: 0 0 45px ${robot.glow};`}></div>
+            
+            <div class="relative rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-md overflow-hidden aspect-[4/3] flex flex-col justify-between">
+              
+              <!-- Blueprint Grid Backdrop -->
+              <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:25px_25px] pointer-events-none" aria-hidden="true"></div>
+              
+              <!-- Top bar telemetry -->
+              <div class="relative z-10 flex justify-between items-center text-[8px] font-black tracking-widest text-team-light/40 uppercase">
+                <span>MODEL REF: {robot.year}-{robot.name}</span>
+                <span class="text-team-secondary">SECURE BLUEPRINT</span>
+              </div>
+              
+              <!-- Main Vector Graphic (Glowing Schematic Design) -->
+              <div class="relative z-10 flex items-center justify-center flex-grow py-4">
+                <svg class="h-44 w-44 opacity-85 group-hover:scale-105 smooth-transition" viewBox="0 0 100 100" style={`color: ${robot.accentColor}; filter: drop-shadow(0 0 8px ${robot.accentColor});`}>
+                  {/* Outer circle */}
+                  <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="1,3" />
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="1.5" />
+                  
+                  {/* CAD grid crosshairs */}
+                  <line x1="50" y1="5" x2="50" y2="95" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2,2" />
+                  <line x1="5" y1="50" x2="95" y2="50" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2,2" />
+                  
+                  {/* Schematic outline overlaying base year */}
+                  {robot.year === '2026' && (
+                    <g stroke="currentColor" fill="none" stroke-width="1.5">
+                      <polygon points="50,15 80,45 80,75 50,85 20,75 20,45" />
+                      <line x1="50" y1="15" x2="50" y2="85" />
+                      <circle cx="50" cy="45" r="10" />
+                      <circle cx="50" cy="45" r="3" fill="currentColor" />
+                    </g>
+                  )}
+                  {robot.year === '2025' && (
+                    <g stroke="currentColor" fill="none" stroke-width="1.5">
+                      <rect x="25" y="25" width="50" height="50" rx="4" />
+                      <line x1="25" y1="25" x2="75" y2="75" />
+                      <line x1="75" y1="25" x2="25" y2="75" />
+                      <circle cx="50" cy="50" r="12" />
+                    </g>
+                  )}
+                  {robot.year === '2024' && (
+                    <g stroke="currentColor" fill="none" stroke-width="1.5">
+                      <polygon points="50,20 78,75 22,75" />
+                      <circle cx="50" cy="53" r="8" />
+                      <line x1="50" y1="20" x2="50" y2="75" stroke-dasharray="2,1" />
+                    </g>
+                  )}
+                </svg>
+              </div>
+
+              <!-- Lower overlay tag -->
+              <div class="relative z-10 flex justify-between items-end">
+                <div class="text-left">
+                  <span class="text-[9px] font-black tracking-widest text-team-light/30 uppercase block">YEAR DESIGN</span>
+                  <span class="text-2xl font-black italic text-team-light tracking-tighter" style={`color: ${robot.accentColor};`}>{robot.year}</span>
+                </div>
+                <div class="text-right">
+                  <span class="text-[9px] font-black tracking-widest text-team-light/30 uppercase block">SPEC COMPILATION</span>
+                  <span class="text-xs font-bold text-team-light/75 uppercase tracking-widest">{robot.imageAlt}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Robot Information / Detailed Specifications Sheet -->
+          <div class="w-full lg:w-1/2 space-y-6 text-left select-none">
+            <div>
+              <span class="text-[9px] md:text-[10px] font-black tracking-[0.25em] uppercase" style={`color: ${robot.accentColor};`}>
+                {robot.season}
+              </span>
+              <h3 class="mt-1 text-3xl md:text-4xl font-black tracking-tighter text-team-light uppercase italic">
+                {robot.name}
+              </h3>
+              <p class="mt-3 text-xs md:text-sm leading-relaxed text-team-light/65">
+                {robot.description}
+              </p>
+            </div>
+
+            <!-- Technical Specifications Table -->
+            <div class="rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur-md">
+              <span class="text-[8px] font-black tracking-widest text-team-light/35 uppercase block mb-3">
+                SYSTEM SPECIFICATIONS TELEMETRY
+              </span>
+              <div class="grid grid-cols-1 gap-y-3 gap-x-6 sm:grid-cols-2">
+                {robot.specs.map((spec) => (
+                  <div class="border-b border-white/5 pb-2">
+                    <span class="text-[8px] font-black tracking-widest text-team-light/40 uppercase block">
+                      {spec.label}
+                    </span>
+                    <span class="text-xs font-bold text-team-light/85 uppercase tracking-wide">
+                      {spec.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- CTA links -->
+            {robot.year === '2026' && (
+              <div class="flex flex-wrap gap-3 pt-2">
+                <a 
+                  href={robot.ctaLink}
+                  class="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-[10px] font-black tracking-widest uppercase text-team-light smooth-transition hover:bg-white/10 hover:border-team-secondary/50 cursor-pointer text-center"
+                >
+                  View Subsystems Spec Sheet
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Engineering Principles -->
+  <section class="relative mx-auto max-w-7xl px-4 py-20 border-t border-white/5">
+    <SectionHeader title="ENGINEERING METHODOLOGY & PRINCIPLES" />
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3 mt-12">
+      <div class="rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-md smooth-transition hover:border-team-secondary/35">
+        <h4 class="text-sm md:text-base font-black tracking-tight text-team-light uppercase italic mb-2">
+          CAD COLLABORATION // ONSHAPE
+        </h4>
+        <p class="text-xs leading-relaxed text-team-light/60">
+          Our entire design is built collaboratively on Onshape, allowing Mechanical and Software subteams to work simultaneously, preventing mounting interferences and simulating drivetrain kinematics early.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-md smooth-transition hover:border-team-secondary/35">
+        <h4 class="text-sm md:text-base font-black tracking-tight text-team-light uppercase italic mb-2">
+          3D PRINTING // BAMBU LAB P1S
+        </h4>
+        <p class="text-xs leading-relaxed text-team-light/60">
+          We leverage carbon fiber reinforced nylon (PA-CF), tough PETG, and flexible TPU filaments printed on our Bambu Lab P1S machines to fabricate intake mounts, complex hopper guides, and high-traction wheels.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-md smooth-transition hover:border-team-secondary/35">
+        <h4 class="text-sm md:text-base font-black tracking-tight text-team-light uppercase italic mb-2">
+          CNC ROUTING // FABRICATION
+        </h4>
+        <p class="text-xs leading-relaxed text-team-light/60">
+          Precision fabrication of custom structural frame plates, gearboxes, and belly pans is completed on 3-axis CNC routers using 6061-T6 aluminum sheets to achieve weight optimization.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Contact />
+  <Footer />
+</Layout>

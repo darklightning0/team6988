@@ -1,57 +1,104 @@
 ---
 const links = [
-  { label: 'Home', href: '#' },
-  { label: 'About Us', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Sponsors', href: '#sponsors' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: `${import.meta.env.BASE_URL.replace(/\/$/, '') || '/'}` },
+  { label: 'About Us', href: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/about` },
+  { label: 'Projects', href: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/projects` },
+  { label: 'Sponsors', href: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/sponsors` },
+  { label: 'Contact', href: `${import.meta.env.BASE_URL.replace(/\/$/, '') || '/'}#contact` },
 ];
 
 const robotLinks = [
-  { label: 'Technical Binder', href: `${import.meta.env.BASE_URL}/robots/technical-binder` },
-  { label: '2026 Robot', href: `${import.meta.env.BASE_URL}/robots/2026` },
+  { label: 'Robot Hangar', href: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/robots` },
+  { label: '2026 Robot', href: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/robots/2026` },
+  { label: 'Technical Binder', href: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/robots/technical-binder` },
 ];
 
 const navLinkClass =
-  'text-sm font-medium text-team-light transition-all duration-500 ease-out hover:text-team-secondary';
+  'relative z-10 px-4 py-2 rounded-full font-bold text-[10px] md:text-xs uppercase tracking-wider text-team-light/75 hover:text-team-light hover:bg-white/10 smooth-transition';
+
+const dropdownContainerClass =
+  'absolute top-full left-0 mt-2 hidden min-w-[200px] flex-col rounded-2xl border border-white/10 bg-team-dark/95 p-2.5 shadow-2xl backdrop-blur-2xl group-hover:flex animate-fade-in z-50';
 
 const dropdownLinkClass =
-  'text-team-light hover:text-team-accent px-4 py-2 hover:bg-team-dark/50 transition-all duration-500 ease-out';
+  'text-[10px] md:text-xs font-bold uppercase tracking-wider text-team-light/70 hover:text-team-secondary px-4 py-2.5 rounded-xl hover:bg-white/5 smooth-transition';
 
 const mobileNavLinkClass =
-  'mobile-nav-link block rounded-md px-2 py-3 text-base font-medium text-team-primary-300 transition-all duration-500 ease-out hover:bg-team-dark-800 hover:text-team-secondary';
+  'mobile-nav-link block rounded-xl px-4 py-3 text-xs font-bold uppercase tracking-wider text-team-light/70 smooth-transition hover:bg-white/10 hover:text-team-light';
 
 const mobileSubNavLinkClass =
-  'mobile-nav-link block rounded-md py-2 pl-8 pr-2 text-base font-medium text-team-primary-300 transition-all duration-500 ease-out hover:bg-team-dark-800 hover:text-team-secondary';
+  'mobile-nav-link block rounded-xl py-2.5 pl-8 pr-4 text-xs font-bold uppercase tracking-wider text-team-light/60 smooth-transition hover:bg-white/5 hover:text-team-secondary';
 ---
 
-<nav
-  id="navbar"
-  class="fixed top-0 z-50 w-full border-b border-team-tertiary-800/50 shadow-xl shadow-team-dark/50 transition-all duration-500 ease-out"
->
-  <div class="mx-auto max-w-7xl px-4 sm:px-6">
-    <div class="flex items-center justify-between py-4">
+<!-- Suspended floating wrapper - now wider (max-w-7xl) with transition-all for appearing/disappearing scroll animations -->
+<div class="fixed top-4 md:top-6 left-1/2 transform -translate-x-1/2 z-50 w-[95%] md:w-[94%] max-w-7xl pointer-events-none transition-all duration-500 cubic-bezier(0.65, 0, 0.35, 1)">
+  <nav
+    id="navbar"
+    class="pointer-events-auto w-full bg-white/5 backdrop-blur-2xl border border-white/15 rounded-full p-2.5 flex items-center justify-between shadow-[0_12px_40px_rgba(0,0,0,0.3)] smooth-transition"
+  >
+    <div class="flex items-center pl-4">
+      <!-- Removed the glowing dot from here -->
       <a
-        href="#"
-        class="text-lg font-bold tracking-wide text-team-light transition-all duration-500 ease-out hover:text-team-secondary-300"
+        href={links[0].href}
+        class="text-xs md:text-sm font-black tracking-tight uppercase italic text-team-light hover:text-team-secondary smooth-transition flex items-center"
       >
-        Team 6988
+        WILDBYTE
       </a>
+    </div>
 
+    <!-- Desktop Navigation Links -->
+    <ul class="hidden items-center gap-1 md:flex pr-2">
+      {
+        links.slice(0, 2).map((link) => (
+          <li>
+            <a href={link.href} class={navLinkClass}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+
+      <li class="group relative">
+        <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/robots`} class={navLinkClass}>
+          Robots
+        </a>
+        <div class={dropdownContainerClass}>
+          {
+            robotLinks.map((link) => (
+              <a href={link.href} class={dropdownLinkClass}>
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+      </li>
+
+      {
+        links.slice(2).map((link) => (
+          <li>
+            <a href={link.href} class={navLinkClass}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Mobile Navigation Toggle -->
+    <div class="pr-2 md:hidden">
       <button
         id="menu-toggle"
         type="button"
-        class="inline-flex items-center justify-center rounded-md p-2 text-team-tertiary-300 transition-all duration-500 ease-out hover:bg-team-dark-800 hover:text-team-secondary md:hidden"
+        class="inline-flex items-center justify-center rounded-full p-2 bg-white/5 hover:bg-white/10 text-team-light smooth-transition"
         aria-controls="mobile-menu"
         aria-expanded="false"
         aria-label="Toggle navigation menu"
       >
         <svg
           id="menu-icon-open"
-          class="h-6 w-6"
+          class="h-4 w-4"
           fill="none"
           viewBox="0 0 24 24"
-          stroke-width="1.5"
+          stroke-width="2.5"
           stroke="currentColor"
           aria-hidden="true"
         >
@@ -62,10 +109,10 @@ const mobileSubNavLinkClass =
         </svg>
         <svg
           id="menu-icon-close"
-          class="hidden h-6 w-6"
+          class="hidden h-4 w-4"
           fill="none"
           viewBox="0 0 24 24"
-          stroke-width="1.5"
+          stroke-width="2.5"
           stroke="currentColor"
           aria-hidden="true"
         >
@@ -75,90 +122,52 @@ const mobileSubNavLinkClass =
             d="M6 18 18 6M6 6l12 12"></path>
         </svg>
       </button>
-
-      <ul class="hidden items-center gap-8 md:flex">
-        {
-          links.slice(0, 2).map((link) => (
-            <li>
-              <a href={link.href} class={navLinkClass}>
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
-
-        <li class="group relative">
-          <a href="#robots" class={navLinkClass}>
-            Robots
-          </a>
-          <div
-            class="absolute top-full left-0 hidden min-w-[200px] flex-col rounded-lg border border-team-tertiary bg-team-dark py-2 shadow-xl transition-all group-hover:flex"
-          >
-            {
-              robotLinks.map((link) => (
-                <a href={link.href} class={dropdownLinkClass}>
-                  {link.label}
-                </a>
-              ))
-            }
-          </div>
-        </li>
-
-        {
-          links.slice(2).map((link) => (
-            <li>
-              <a href={link.href} class={navLinkClass}>
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
     </div>
+  </nav>
 
-    <div
-      id="mobile-menu"
-      class="hidden border-t border-team-tertiary-800/60 pb-4 md:hidden"
-    >
-      <ul class="flex flex-col gap-1 pt-2">
-        {
-          links.slice(0, 2).map((link) => (
-            <li>
-              <a href={link.href} class={mobileNavLinkClass}>
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
+  <!-- Mobile Dropdown Menu -->
+  <div
+    id="mobile-menu"
+    class="pointer-events-auto hidden mt-3 w-full bg-team-dark/95 backdrop-blur-3xl border border-white/10 rounded-3xl p-3 shadow-2xl smooth-transition"
+  >
+    <ul class="flex flex-col gap-1">
+      {
+        links.slice(0, 2).map((link) => (
+          <li>
+            <a href={link.href} class={mobileNavLinkClass}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
 
-        <li>
-          <a href="#robots" class={mobileNavLinkClass}>
-            Robots
-          </a>
-        </li>
-        {
-          robotLinks.map((link) => (
-            <li>
-              <a href={link.href} class={mobileSubNavLinkClass}>
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
+      <li>
+        <span class="block px-4 py-2 text-[10px] font-bold tracking-[0.2em] uppercase text-team-secondary">Robots</span>
+      </li>
+      {
+        robotLinks.map((link) => (
+          <li>
+            <a href={link.href} class={mobileSubNavLinkClass}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
 
-        {
-          links.slice(2).map((link) => (
-            <li>
-              <a href={link.href} class={mobileNavLinkClass}>
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+      <li class="h-px bg-white/5 my-1 mx-2"></li>
+
+      {
+        links.slice(2).map((link) => (
+          <li>
+            <a href={link.href} class={mobileNavLinkClass}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
-</nav>
+</div>
 
 <script>
   const navbar = document.getElementById('navbar');
@@ -197,17 +206,26 @@ const mobileSubNavLinkClass =
     const scrollingDown = currentScrollY > lastScrollY;
     const scrolledPastTop = currentScrollY > 0;
 
+    // We can scale or shift the floating pill on scroll
     if (scrolledPastTop) {
-      navbar.classList.add('bg-team-dark-950');
+      navbar.classList.add('bg-team-dark/85');
+      navbar.classList.remove('bg-white/5');
+      navbar.classList.add('shadow-[0_12px_45px_rgba(0,0,0,0.5)]');
     } else {
-      navbar.classList.remove('bg-team-dark-950');
+      navbar.classList.remove('bg-team-dark/85');
+      navbar.classList.add('bg-white/5');
+      navbar.classList.remove('shadow-[0_12px_45px_rgba(0,0,0,0.5)]');
     }
 
-    if (scrollingDown && currentScrollY > 64) {
-      navbar.classList.add('-translate-y-full');
-      setMenuOpen(false);
-    } else {
-      navbar.classList.remove('-translate-y-full');
+    // Slide navbar up when scrolling down (with smooth transition on parent container)
+    const parentContainer = navbar.parentElement;
+    if (parentContainer) {
+      if (scrollingDown && currentScrollY > 80) {
+        parentContainer.classList.add('-translate-y-32');
+        setMenuOpen(false);
+      } else {
+        parentContainer.classList.remove('-translate-y-32');
+      }
     }
 
     lastScrollY = currentScrollY;
