@@ -5,6 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://darklightning0.github.io',
+  base: '/team6988',
   vite: {
     plugins: [tailwindcss()],
     // Do not assetsInclude .glb — public/robot.glb is served as-is from /public.

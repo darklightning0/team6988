@@ -8,13 +8,16 @@ interface Props {
 }
 
 const { title, description, linkText, href, imgSrc } = Astro.props;
+
+const cleanHref = href.startsWith('/') ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${href}` : href;
+const cleanImgSrc = imgSrc.startsWith('/') ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${imgSrc}` : imgSrc;
 ---
 
 <article
   class="group flex h-full flex-col overflow-hidden rounded-xl border border-team-tertiary-800/60 bg-team-dark-900 shadow-xl shadow-team-dark/50 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-team-secondary"
 >
   <img
-    src={imgSrc}
+    src={cleanImgSrc}
     alt={title}
     class="h-48 w-full object-cover"
     loading="lazy"
@@ -24,7 +27,7 @@ const { title, description, linkText, href, imgSrc } = Astro.props;
     <h3 class="mb-3 text-2xl font-bold text-team-tertiary-200">{title}</h3>
     <p class="mb-6 line-clamp-3 text-team-light/80">{description}</p>
     <a
-      href={href}
+      href={cleanHref}
       class="mt-auto inline-flex items-center gap-1 font-semibold text-team-accent transition-all duration-500 ease-out group-hover:text-team-accent-400"
     >
       {linkText}
