@@ -1,0 +1,508 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const subsystems = [
+  {
+    title: 'Swerve Architecture',
+    description:
+      'Engineered for maximum maneuverability, featuring optimized gearbox center distances of 39.5mm.',
+  },
+  {
+    title: 'Bambu Lab P1S Intake',
+    description:
+      'Lightweight geometry utilizing 3D printed components for rapid iteration.',
+  },
+  {
+    title: 'Scoring Mechanism',
+    description: 'Optimized for high-speed cycle times.',
+  },
+];
+---
+
+<Layout>
+  <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.97/style.min.css" type="text/css">
+  <script is:inline src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.97/viewer3D.min.js"></script>
+
+  <style is:inline>
+    .adsk-viewing-viewer .adsk-toolbar,
+    .adsk-viewing-viewer .home-button,
+    .adsk-viewing-viewer .viewcube,
+    .adsk-viewing-viewer .viewcubeWrapper,
+    .adsk-viewing-viewer .info-button,
+    .adsk-viewing-viewer .settings-button,
+    .adsk-viewing-viewer .fullscreen-button,
+    .adsk-viewing-viewer .progressbg {
+      display: none !important;
+    }
+    
+    /* Hide scrollbar completely */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Custom glowing pulse for the V-arrows */
+    @keyframes pulse-glow {
+      0%, 100% { 
+        opacity: 0.4; 
+        filter: drop-shadow(0 0 2px rgba(22, 163, 74, 0.2)); 
+      }
+      50% { 
+        opacity: 1; 
+        filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.8)); 
+      }
+    }
+    .animate-pulse-glow {
+      animation: pulse-glow 2.5s infinite ease-in-out;
+    }
+  </style>
+
+  <main class="h-screen w-full overflow-hidden bg-[#0a110d] relative font-sans">
+    
+    <div id="slide-track" class="w-full h-[200vh] transform translate-y-0" style="transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);">
+      
+      <section class="h-screen w-full relative bg-[#0a110d]">
+        
+        <div id="aps-viewer" class="absolute inset-0 z-0"></div>
+
+        <a href="/" class="absolute top-8 left-8 z-40 flex items-center gap-3 hover:opacity-80 transition-opacity">
+          <div class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-team-tertiary to-team-secondary shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-7 w-7 text-team-light">
+              <path fill-rule="evenodd" d="M12 2.25c-2.47 0-4.47 1.6-4.47 3.58 0 .9.47 1.72 1.22 2.32-.75.6-1.22 1.42-1.22 2.32 0 1.98 2 3.58 4.47 3.58s4.47-1.6 4.47-3.58c0-.9-.47-1.72-1.22-2.32.75-.6 1.22-1.42 1.22-2.32 0-1.98-2-3.58-4.47-3.58zm-6.3 8.1c-.83 0-1.5.67-1.5 1.5v.3c0 3.04 3.47 5.5 7.8 5.5s7.8-2.46 7.8-5.5v-.3c0-.83-.67-1.5-1.5-1.5h-12.6z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <span class="text-xl font-extrabold tracking-tight text-team-secondary uppercase">TEAM 6988</span>
+        </a>
+
+        <div class="absolute top-8 left-1/2 transform -translate-x-1/2 z-40 w-11/12 max-w-4xl">
+          <div class="bg-white/40 backdrop-blur-2xl border border-white/60 rounded-full p-1.5 flex justify-between shadow-[0_8px_30px_rgba(0,0,0,0.06)] gap-1">
+            <button data-target="full" class="subsystem-btn active px-4 md:px-6 py-2.5 rounded-full bg-white shadow-md text-[#16a34a] font-bold text-xs md:text-sm tracking-wide transition-all w-1/5 text-center">
+              FULL
+            </button>
+            <button data-target="NAUO289" class="subsystem-btn px-4 md:px-6 py-2.5 rounded-full text-gray-500 hover:text-gray-900 hover:bg-white/50 font-bold text-xs md:text-sm tracking-wide transition-all w-1/5 text-center">
+              DRIVE
+            </button>
+            <button data-target="NAUO861" class="subsystem-btn px-4 md:px-6 py-2.5 rounded-full text-gray-500 hover:text-gray-900 hover:bg-white/50 font-bold text-xs md:text-sm tracking-wide transition-all w-1/5 text-center">
+              INTAKE
+            </button>
+            <button data-target="NAUO1171" class="subsystem-btn px-4 md:px-6 py-2.5 rounded-full text-gray-500 hover:text-gray-900 hover:bg-white/50 font-bold text-xs md:text-sm tracking-wide transition-all w-1/5 text-center">
+              HOPPER
+            </button>
+            <button data-target="NAUO2111" class="subsystem-btn px-4 md:px-6 py-2.5 rounded-full text-gray-500 hover:text-gray-900 hover:bg-white/50 font-bold text-xs md:text-sm tracking-wide transition-all w-1/5 text-center">
+              SHOOTER
+            </button>
+          </div>
+        </div>
+
+        <div class="absolute inset-0 z-10 pointer-events-none">
+          
+          <div id="overlay-full" class="text-overlay absolute inset-0 transition-all duration-500 opacity-100 visible pointer-events-none">
+            <div class="absolute top-24 left-8 md:left-16 max-w-[280px] pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Team 6988</h3>
+              <h2 class="text-4xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Sparky</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Welcome to the interactive technical binder for Sparky, built for the FIRST Robotics Rebuilt season. Explore the engineering, manufacturing, and strategic design behind our machine.
+              </p>
+            </div>
+
+            <div class="absolute bottom-32 left-8 md:left-16 max-w-[280px] pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Navigation</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Controls</h2>
+              <p class="text-xs leading-relaxed text-gray-600 font-medium mb-4">
+                Orbit: Left Click + Drag<br>Pan: Right Click + Drag<br>Zoom: Scroll Wheel
+              </p>
+              <div class="space-y-2">
+                <p class="text-[0.65rem] leading-relaxed text-gray-500 tracking-widest font-bold">
+                  <span class="text-gray-900 uppercase">Isolate:</span> Hides all other parts to focus strictly on the active mechanism.
+                </p>
+                <p class="text-[0.65rem] leading-relaxed text-gray-500 tracking-widest font-bold">
+                  <span class="text-gray-900 uppercase">Ghost:</span> Renders the rest of the chassis transparent to provide mounting context.
+                </p>
+              </div>
+            </div>
+
+            <div class="absolute top-24 right-8 md:right-16 max-w-[280px] text-right pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Architecture</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Subsystems</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Use the navigation pill to jump between subsystems. Combine these views with the Explode slider to investigate internal gearbox and mounting geometry.
+              </p>
+            </div>
+            
+            <div class="absolute bottom-32 right-8 md:right-16 max-w-[280px] text-right pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Strategy</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Rebuilt Season</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Sparky is engineered to maximize cycle times and defensive resilience. Featuring a massive 60-piece hopper capacity and dual Limelight tracking for absolute field odometry.
+              </p>
+            </div>
+          </div>
+
+          <div id="overlay-NAUO289" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
+            <div class="absolute top-24 left-8 md:left-16 max-w-[300px] pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Drivetrain</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Kinematics</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Powered by 8 Kraken X60 motors, the chassis utilizes 4 SDS MK5i swerve modules (L2 gearing). These modules structurally bind the chassis corners together for maximum rigidity.
+              </p>
+            </div>
+            <div class="absolute bottom-32 left-8 md:left-16 max-w-[300px] pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Drivetrain</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Frame</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Constructed from 25x50mm aluminum extrusions, the chassis measures a compact 69.25 x 69.25 cm to navigate crowded field environments easily.
+              </p>
+            </div>
+            <div class="absolute top-24 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Drivetrain</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Belly Pan</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                The mounting plate is strategically pocketed to minimize weight while maintaining structural integrity. It serves as a reinforced mounting bed for centralized electrical routing.
+              </p>
+            </div>
+            <div class="absolute bottom-32 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Drivetrain</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Bumpers</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Wood-backed, reversible red-blue bumpers are structurally integrated into the plate. They provide critical impact protection for the hopper panels while guiding the intake's deployment.
+              </p>
+            </div>
+          </div>
+
+          <div id="overlay-NAUO861" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
+            <div class="absolute top-24 left-8 md:left-16 max-w-[300px] pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Intake</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Actuation</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Powered by a Kraken X60 with a 9.18:1 reduction, the arm maintains precise positioning. A custom 3D-printed mechanical hard-stop protects the assembly from over-extension impacts.
+              </p>
+            </div>
+            <div class="absolute bottom-32 left-8 md:left-16 max-w-[300px] pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Intake</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Control</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Software-driven closed-loop control utilizes absolute encoders to automatically snap and hold the intake at optimal deployment and stowage angles.
+              </p>
+            </div>
+            <div class="absolute top-24 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Intake</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Acquisition</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                A grip-tape-enhanced Delrin roller acts as the primary acquisition mechanism. Secondary compliant wheels accelerate cycle times and prevent game piece jamming during intake.
+              </p>
+            </div>
+            <div class="absolute bottom-32 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Intake</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Durability</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                A rugged 25x50mm extrusion spans the front roller to absorb field collisions. Extended side panels integrate directly with the intake to expand the robot's capacity to ~16 game pieces.
+              </p>
+            </div>
+          </div>
+
+          <div id="overlay-NAUO1171" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
+            <div class="absolute top-24 left-8 md:left-16 max-w-[300px] pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Hopper</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Floor Belts</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Ten 565mm timing belts create an active floor across the entire hopper, eliminating dead zones, preventing jams, and aggressively driving game pieces toward the indexer.
+              </p>
+            </div>
+            <div class="absolute bottom-32 left-8 md:left-16 max-w-[300px] pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Hopper</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Funneling</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Four 3D-printed directional panels aggressively funnel game pieces toward the shooter mechanism, stylized with the signature 6988 panther eye aesthetic.
+              </p>
+            </div>
+            <div class="absolute top-24 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Hopper</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Capacity</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Manufactured from resilient impact-resistant polycarbonate, the side panels maximize internal volume, allowing the machine to hold a massive payload of over 60 game pieces.
+              </p>
+            </div>
+            <div class="absolute bottom-32 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Hopper</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Odometry</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Twin Limelight 4 vision systems are mounted to the side panels in custom 3D-printed angled housings, utilizing AprilTag pipelines to maintain flawless absolute field odometry.
+              </p>
+            </div>
+          </div>
+
+          <div id="overlay-NAUO2111" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
+            <div class="absolute top-24 left-8 md:left-16 max-w-[300px] pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Shooter</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Flywheels</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Powered by dual PID-tuned Falcon 500s geared up 3.25:1, the shooter utilizes ten 4-inch wheels split across two main flywheels for unmatched shot stability and precision.
+              </p>
+            </div>
+            <div class="absolute bottom-32 left-8 md:left-16 max-w-[300px] pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Shooter</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Targeting</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Two dedicated Limelight 4s lock onto the hub, allowing the software to automatically align the drivetrain and calculate dynamic RPMs for on-the-fly shooting from anywhere in the zone.
+              </p>
+            </div>
+            <div class="absolute top-24 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Shooter</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Agitator</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                An active agitator mechanism sits at the throat of the shooter, aggressively breaking up jams and ensuring a smooth, continuous feed of game pieces into the flywheels.
+              </p>
+            </div>
+            <div class="absolute bottom-32 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
+              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-1">Shooter</h3>
+              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Trajectory</h2>
+              <p class="text-xs leading-loose text-gray-600 font-medium">
+                Clear polycarbonate guide plates ensure a rigid, stable trajectory for exiting game pieces, reinforced by twin 5mm aluminum side plates bearing the organic panther visual identity.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-40 w-max max-w-4xl">
+          <div class="bg-white/40 backdrop-blur-2xl border border-white/60 rounded-[2rem] p-3 px-6 md:px-8 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+            
+            <div class="flex bg-gray-100/50 rounded-xl p-1 border border-gray-200/50">
+              <button id="isolate-btn" class="mode-toggle active px-5 py-2 rounded-lg bg-white shadow-sm text-[#16a34a] font-bold text-xs uppercase tracking-wider transition-colors">
+                Isolate
+              </button>
+              <button id="ghost-btn" class="mode-toggle px-5 py-2 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-white/50 font-bold text-xs uppercase tracking-wider transition-colors">
+                Ghost
+              </button>
+            </div>
+
+            <div class="flex-shrink-0 flex items-center justify-center">
+              <svg onclick="scrollToSoftware()" class="w-8 h-8 text-[#16a34a] cursor-pointer animate-pulse-glow hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+
+            <div class="flex items-center gap-4 w-[200px]">
+              <label class="text-gray-900 text-xs font-bold uppercase tracking-wider">Explode</label>
+              <input 
+                id="explode-slider" 
+                type="range" min="0" max="1" step="0.01" value="0"
+                class="w-full h-2 bg-white/60 rounded-lg appearance-none cursor-pointer border border-white accent-[#16a34a] shadow-inner"
+              >
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <section class="h-screen w-full relative bg-white flex flex-col items-center pt-24 px-8">
+        
+        <div class="absolute top-10 left-1/2 transform -translate-x-1/2 z-50">
+          <svg onclick="scrollToCAD()" class="w-10 h-10 text-[#16a34a] cursor-pointer animate-pulse-glow hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path>
+          </svg>
+        </div>
+
+        <div class="max-w-5xl w-full mx-auto mt-12">
+          <h3 class="text-sm font-bold tracking-[0.2em] text-[#16a34a] uppercase mb-2">Beyond the Hardware</h3>
+          <h2 class="text-5xl font-black tracking-tighter text-gray-900 mb-12 uppercase italic">Software Architecture</h2>
+          
+          <p class="text-lg leading-relaxed text-gray-600 mb-12 max-w-3xl">
+            With the mechanics completely locked in, the focus shifts to autonomous pathing, AprilTag odometry pipelines, and closed-loop control systems powered by WPILib.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+              <h4 class="text-xl font-black italic uppercase text-gray-900 mb-4">Vision Pipeline</h4>
+              <p class="text-sm text-gray-600 leading-relaxed">Details about your Limelight integration, pipeline tuning, and target acquisition algorithms go here.</p>
+            </div>
+            <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+              <h4 class="text-xl font-black italic uppercase text-gray-900 mb-4">Autonomous Routines</h4>
+              <p class="text-sm text-gray-600 leading-relaxed">Details about your trajectory generation, swerve kinematics, and auto pathing go here.</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <script is:inline>
+    // --- SCROLL NAVIGATION LOGIC ---
+    function scrollToSoftware() {
+      document.getElementById('slide-track').style.transform = 'translateY(-100vh)';
+    }
+
+    function scrollToCAD() {
+      document.getElementById('slide-track').style.transform = 'translateY(0)';
+    }
+    // ------------------------------------
+
+    function getAccessToken(callback) {
+      fetch('https://aps-token-server.team6988.workers.dev')
+        .then((res) => res.json())
+        .then((data) => callback(data.access_token, data.expires_in));
+    }
+
+    const URN = 'dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dGVhbTY5ODgtYmluZGVyL3Rlc3Quc3RlcA';
+    let viewer;
+    let isGhostMode = false;
+
+    // --- Set Global Preferences BEFORE Document Load ---
+    function applyViewerPreferences() {
+      viewer.setTheme('light-theme');
+      viewer.setBackgroundColor(245, 245, 247, 220, 220, 225);
+      viewer.setLightPreset(4); 
+      viewer.setDisplayEdges(false);
+      viewer.prefs.set('zoomTowardsPivot', true);
+      viewer.prefs.set('fusionOrbit', true);
+      viewer.prefs.set('orbitPastWorldPoles', false);
+    }
+
+    function onDocumentLoadSuccess(doc) {
+      const defaultModel = doc.getRoot().getDefaultGeometry();
+
+      viewer.loadDocumentNode(doc, defaultModel).then(() => {
+        try {
+          viewer.navigation.setWorldUpVector(new THREE.Vector3(0, 0, 1));
+          viewer.setGhosting(false);
+
+          viewer.loadExtension('Autodesk.ViewCubeUi').then((viewCubeExt) => {
+            if (viewer.model && viewer.model.isLoadDone()) {
+               viewCubeExt.setViewCube('front-top-left'); 
+               viewer.navigation.getCamera().position.multiplyScalar(1.2); 
+               viewer.navigation.updateCamera();
+            } else {
+               viewer.addEventListener(Autodesk.Viewing.GEOMETRY_LOADED_EVENT, () => {
+                 setTimeout(() => {
+                   viewCubeExt.setViewCube('front-top-left'); 
+                   viewer.navigation.getCamera().position.multiplyScalar(1.2); 
+                   viewer.navigation.updateCamera();
+                 }, 200);
+               });
+            }
+          });
+        } catch (error) {
+          console.error('Autodesk styling pipeline failed:', error);
+        }
+      });
+    }
+
+    function onDocumentLoadFailure(errorCode) {
+      console.error('Autodesk Viewer Load Failure:', errorCode);
+    }
+
+    Autodesk.Viewing.Initializer({ env: 'AutodeskProduction', api: 'derivativeV2', getAccessToken }, function () {
+      viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('aps-viewer'));
+      viewer.start();
+      
+      applyViewerPreferences(); 
+      
+      Autodesk.Viewing.Document.load('urn:' + URN, onDocumentLoadSuccess, onDocumentLoadFailure);
+      setupHUDControls();
+    });
+
+    function setupHUDControls() {
+      const explodeSlider = document.getElementById('explode-slider');
+      explodeSlider.addEventListener('input', (e) => {
+        viewer.explode(parseFloat(e.target.value));
+      });
+
+      const isolateBtn = document.getElementById('isolate-btn');
+      const ghostBtn = document.getElementById('ghost-btn');
+
+      isolateBtn.addEventListener('click', () => {
+        isGhostMode = false;
+        viewer.setGhosting(false);
+        // Apply refined light-mode button styles
+        isolateBtn.classList.add('bg-white', 'shadow-sm', 'text-[#16a34a]');
+        isolateBtn.classList.remove('text-gray-500', 'hover:text-gray-900', 'hover:bg-white/50');
+        ghostBtn.classList.remove('bg-white', 'shadow-sm', 'text-[#16a34a]');
+        ghostBtn.classList.add('text-gray-500', 'hover:text-gray-900', 'hover:bg-white/50');
+      });
+
+      ghostBtn.addEventListener('click', () => {
+        isGhostMode = true;
+        viewer.setGhosting(true);
+        // Apply refined light-mode button styles
+        ghostBtn.classList.add('bg-white', 'shadow-sm', 'text-[#16a34a]');
+        ghostBtn.classList.remove('text-gray-500', 'hover:text-gray-900', 'hover:bg-white/50');
+        isolateBtn.classList.remove('bg-white', 'shadow-sm', 'text-[#16a34a]');
+        isolateBtn.classList.add('text-gray-500', 'hover:text-gray-900', 'hover:bg-white/50');
+      });
+
+      const subsystemBtns = document.querySelectorAll('.subsystem-btn');
+      subsystemBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          // Reset all buttons to inactive gray
+          subsystemBtns.forEach((b) => {
+            b.classList.remove('bg-white', 'shadow-md', 'text-[#16a34a]');
+            b.classList.add('text-gray-500', 'hover:text-gray-900', 'hover:bg-white/50');
+          });
+          // Highlight the clicked button
+          btn.classList.add('bg-white', 'shadow-md', 'text-[#16a34a]');
+          btn.classList.remove('text-gray-500', 'hover:text-gray-900', 'hover:bg-white/50');
+
+          const target = btn.getAttribute('data-target');
+
+          // Invisible class toggle for perfect pointer events
+          document.querySelectorAll('.text-overlay').forEach(overlay => {
+            overlay.classList.remove('opacity-100', 'visible');
+            overlay.classList.add('opacity-0', 'invisible');
+          });
+          
+          const activeOverlay = document.getElementById('overlay-' + target);
+          if (activeOverlay) {
+            activeOverlay.classList.remove('opacity-0', 'invisible');
+            activeOverlay.classList.add('opacity-100', 'visible');
+          }
+
+          if (target === 'full') {
+            viewer.showAll();
+            viewer.isolate();
+            viewer.fitToView(); 
+          } else {
+            viewer.search(
+              target,
+              (dbIds) => {
+                if (dbIds.length > 0) {
+                  viewer.isolate(dbIds);
+                  
+                  // --- SMOOTH CAMERA FIT ---
+                  viewer.fitToView(dbIds);
+                  
+                  const nav = viewer.navigation;
+                  const camera = nav.getCamera();
+                  const targetCoord = nav.getTarget();
+                  const pos = camera.position;
+                  
+                  const dir = new THREE.Vector3().subVectors(pos, targetCoord);
+                  
+                  // Scale the distance back by 1.25 (25% further away)
+                  dir.multiplyScalar(1.25);
+                  
+                  const newPos = new THREE.Vector3().addVectors(targetCoord, dir);
+                  
+                  nav.setRequestTransition(true);
+                  nav.setPosition(newPos);
+                  nav.setTarget(targetCoord);
+                  // --------------------
+
+                } else {
+                  console.warn("No parts found! Check your data-target spelling.");
+                }
+              },
+              console.error,
+              ['name'] 
+            );
+          }
+        });
+      });
+    }
+  </script>
+</Layout>

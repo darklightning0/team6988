@@ -1,2 +1,8 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
 @config "../../tailwind.config.mjs";
+
+/* Only scan source files — never public/ or 3D binaries (robot.glb hangs the dev server). */
+@source "../**/*.{astro,html,js,ts,mjs}";
+@source not "../../public/**";
+@source not "../../**/*.glb";
+@source not "../../**/*.gltf";
