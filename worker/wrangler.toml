@@ -1,0 +1,3 @@
+name = "aps-token-server"
+main = "src/index.js"
+compatibility_date = "2024-05-25"
