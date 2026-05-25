@@ -54,6 +54,52 @@ import Layout from '../../layouts/Layout.astro';
     .smooth-transition {
       transition: all 0.35s cubic-bezier(0.65, 0, 0.35, 1);
     }
+
+    /* Mobile: hide desktop overlay text — replaced by bottom drawer */
+    @media (max-width: 767px) {
+      .text-overlay > div {
+        display: none !important;
+      }
+    }
+
+    /* Tablet: tighter overlay panels for more 3D viewer breathing room */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .text-overlay > div {
+        max-width: 220px !important;
+      }
+      /* Move panels more towards center on iPad */
+      .text-overlay > div[class*="md:left-16"] {
+        left: 10vw !important;
+      }
+      .text-overlay > div[class*="md:right-16"] {
+        right: 10vw !important;
+      }
+      .text-overlay > div[class*="md:top-24"] {
+        top: 15vh !important;
+      }
+      .text-overlay > div[class*="md:bottom-32"] {
+        bottom: 18vh !important;
+      }
+      .text-overlay > div h2 {
+        font-size: 1.1rem !important;
+      }
+      .text-overlay > div p {
+        font-size: 0.55rem !important;
+        line-height: 1.6 !important;
+      }
+    }
+
+    /* Mobile drawer card styling */
+    .mobile-card {
+      min-width: 180px;
+      max-width: 220px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
+
+    #drawer-chevron.rotated {
+      transform: rotate(180deg);
+    }
   </style>
 
   <main class="h-screen w-full overflow-hidden bg-team-dark relative font-sans">
@@ -65,24 +111,24 @@ import Layout from '../../layouts/Layout.astro';
         <div id="aps-viewer" class="absolute inset-0 z-0"></div>
 
 
-        <div class="absolute top-8 left-1/2 transform -translate-x-1/2 z-40 w-11/12 max-w-4xl">
-          <div id="subsystem-nav-container" class="relative bg-white/40 backdrop-blur-2xl border border-white/60 rounded-full p-1.5 flex justify-between shadow-[0_8px_30px_rgba(0,0,0,0.06)] gap-1">
+        <div class="absolute top-4 md:top-8 left-1/2 transform -translate-x-1/2 z-40 w-[95%] md:w-11/12 max-w-4xl">
+          <div id="subsystem-nav-container" class="relative bg-white/40 backdrop-blur-2xl border border-white/60 rounded-full p-1.5 flex justify-start md:justify-between shadow-[0_8px_30px_rgba(0,0,0,0.06)] gap-1 overflow-x-auto hide-scrollbar scroll-smooth">
             <!-- Sliding background indicator -->
             <div id="subsystem-indicator" class="absolute bg-white shadow-md rounded-full smooth-transition z-0"></div>
 
-            <button data-target="full" class="subsystem-btn relative z-10 px-4 md:px-6 py-2.5 rounded-full text-team-brand-accent font-bold text-xs md:text-sm tracking-wide transition-all duration-300 w-1/5 text-center">
+            <button data-target="full" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-team-brand-accent font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
               ASSEMBLY
             </button>
-            <button data-target="NAUO289" class="subsystem-btn relative z-10 px-4 md:px-6 py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-xs md:text-sm tracking-wide transition-all duration-300 w-1/5 text-center">
+            <button data-target="NAUO289" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
               DRIVETRAIN
             </button>
-            <button data-target="NAUO861" class="subsystem-btn relative z-10 px-4 md:px-6 py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-xs md:text-sm tracking-wide transition-all duration-300 w-1/5 text-center">
+            <button data-target="NAUO861" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
               INTAKE
             </button>
-            <button data-target="NAUO1171" class="subsystem-btn relative z-10 px-4 md:px-6 py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-xs md:text-sm tracking-wide transition-all duration-300 w-1/5 text-center">
+            <button data-target="NAUO1171" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
               HOPPER
             </button>
-            <button data-target="NAUO2111" class="subsystem-btn relative z-10 px-4 md:px-6 py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-xs md:text-sm tracking-wide transition-all duration-300 w-1/5 text-center">
+            <button data-target="NAUO2111" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
               SHOOTER
             </button>
           </div>
@@ -91,18 +137,18 @@ import Layout from '../../layouts/Layout.astro';
         <div class="absolute inset-0 z-10 pointer-events-none">
           
           <div id="overlay-full" class="text-overlay absolute inset-0 transition-all duration-500 opacity-100 visible pointer-events-none">
-            <div class="absolute top-24 left-8 md:left-16 max-w-[280px] pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Team 6988</h3>
-              <h2 class="text-4xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Sparky</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute top-20 md:top-24 left-4 md:left-16 w-[45%] md:max-w-[280px] pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Team 6988</h3>
+              <h2 class="text-2xl md:text-4xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Sparky</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Welcome to the interactive technical binder for Sparky, built for the FIRST Robotics Rebuilt season. Explore the engineering, manufacturing, and strategic design behind our machine.
               </p>
             </div>
 
-            <div class="absolute bottom-32 left-8 md:left-16 max-w-[280px] pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Navigation</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Controls</h2>
-              <p class="text-xs leading-relaxed text-gray-600 font-medium mb-4">
+            <div class="absolute bottom-28 md:bottom-32 left-4 md:left-16 w-[45%] md:max-w-[280px] pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Navigation</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Controls</h2>
+              <p class="text-[0.6rem] md:text-xs leading-relaxed text-gray-600 font-medium mb-4">
                 Orbit: Left Click + Drag<br>Pan: Right Click + Drag<br>Zoom: Scroll Wheel
               </p>
               <div class="space-y-2">
@@ -115,142 +161,142 @@ import Layout from '../../layouts/Layout.astro';
               </div>
             </div>
 
-            <div class="absolute top-24 right-8 md:right-16 max-w-[280px] text-right pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Architecture</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Subsystems</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute top-20 md:top-24 right-4 md:right-16 w-[45%] md:max-w-[280px] text-right pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Architecture</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Subsystems</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Use the navigation pill to jump between subsystems. Combine these views with the Explode slider to investigate internal gearbox and mounting geometry.
               </p>
             </div>
             
-            <div class="absolute bottom-32 right-8 md:right-16 max-w-[280px] text-right pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Strategy</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Rebuilt Season</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute bottom-28 md:bottom-32 right-4 md:right-16 w-[45%] md:max-w-[280px] text-right pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Strategy</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Rebuilt Season</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Sparky is engineered to maximize cycle times and defensive resilience. Featuring a massive 60-piece hopper capacity and dual Limelight tracking for absolute field odometry.
               </p>
             </div>
           </div>
 
           <div id="overlay-NAUO289" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
-            <div class="absolute top-24 left-8 md:left-16 max-w-[300px] pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Drivetrain</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Kinematics</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute top-20 md:top-24 left-4 md:left-16 w-[45%] md:max-w-[300px] pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Drivetrain</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Kinematics</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Powered by 8 Kraken X60 motors, the chassis utilizes 4 SDS MK5i swerve modules (L2 gearing). These modules structurally bind the chassis corners together for maximum rigidity.
               </p>
             </div>
-            <div class="absolute bottom-32 left-8 md:left-16 max-w-[300px] pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Drivetrain</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Frame</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute bottom-28 md:bottom-32 left-4 md:left-16 w-[45%] md:max-w-[300px] pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Drivetrain</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Frame</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Constructed from 25x50mm aluminum extrusions, the chassis measures a compact 69.25 x 69.25 cm to navigate crowded field environments easily.
               </p>
             </div>
-            <div class="absolute top-24 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Drivetrain</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Belly Pan</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute top-20 md:top-24 right-4 md:right-16 w-[45%] md:max-w-[300px] text-right pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Drivetrain</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Belly Pan</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 The mounting plate is strategically pocketed to minimize weight while maintaining structural integrity. It serves as a reinforced mounting bed for centralized electrical routing.
               </p>
             </div>
-            <div class="absolute bottom-32 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Drivetrain</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Bumpers</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute bottom-28 md:bottom-32 right-4 md:right-16 w-[45%] md:max-w-[300px] text-right pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Drivetrain</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Bumpers</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Wood-backed, reversible red-blue bumpers are structurally integrated into the plate. They provide critical impact protection for the hopper panels while guiding the intake's deployment.
               </p>
             </div>
           </div>
 
           <div id="overlay-NAUO861" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
-            <div class="absolute top-24 left-8 md:left-16 max-w-[300px] pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Intake</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Actuation</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute top-20 md:top-24 left-4 md:left-16 w-[45%] md:max-w-[300px] pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Intake</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Actuation</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Powered by a Kraken X60 with a 9.18:1 reduction, the arm maintains precise positioning. A custom 3D-printed mechanical hard-stop protects the assembly from over-extension impacts.
               </p>
             </div>
-            <div class="absolute bottom-32 left-8 md:left-16 max-w-[300px] pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Intake</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Control</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute bottom-28 md:bottom-32 left-4 md:left-16 w-[45%] md:max-w-[300px] pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Intake</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Control</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Software-driven closed-loop control utilizes absolute encoders to automatically snap and hold the intake at optimal deployment and stowage angles.
               </p>
             </div>
-            <div class="absolute top-24 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Intake</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Acquisition</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute top-20 md:top-24 right-4 md:right-16 w-[45%] md:max-w-[300px] text-right pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Intake</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Acquisition</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 A grip-tape-enhanced Delrin roller acts as the primary acquisition mechanism. Secondary compliant wheels accelerate cycle times and prevent game piece jamming during intake.
               </p>
             </div>
-            <div class="absolute bottom-32 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Intake</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Durability</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute bottom-28 md:bottom-32 right-4 md:right-16 w-[45%] md:max-w-[300px] text-right pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Intake</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Durability</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 A rugged 25x50mm extrusion spans the front roller to absorb field collisions. Extended side panels integrate directly with the intake to expand the robot's capacity to ~16 game pieces.
               </p>
             </div>
           </div>
 
           <div id="overlay-NAUO1171" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
-            <div class="absolute top-24 left-8 md:left-16 max-w-[300px] pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Hopper</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Floor Belts</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute top-20 md:top-24 left-4 md:left-16 w-[45%] md:max-w-[300px] pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Hopper</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Floor Belts</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Ten 565mm timing belts create an active floor across the entire hopper, eliminating dead zones, preventing jams, and aggressively driving game pieces toward the indexer.
               </p>
             </div>
-            <div class="absolute bottom-32 left-8 md:left-16 max-w-[300px] pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Hopper</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Funneling</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute bottom-28 md:bottom-32 left-4 md:left-16 w-[45%] md:max-w-[300px] pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Hopper</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Funneling</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Four 3D-printed directional panels aggressively funnel game pieces toward the shooter mechanism, stylized with the signature 6988 panther eye aesthetic.
               </p>
             </div>
-            <div class="absolute top-24 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Hopper</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Capacity</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute top-20 md:top-24 right-4 md:right-16 w-[45%] md:max-w-[300px] text-right pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Hopper</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Capacity</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Manufactured from resilient impact-resistant polycarbonate, the side panels maximize internal volume, allowing the machine to hold a massive payload of over 60 game pieces.
               </p>
             </div>
-            <div class="absolute bottom-32 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Hopper</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Odometry</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute bottom-28 md:bottom-32 right-4 md:right-16 w-[45%] md:max-w-[300px] text-right pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Hopper</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Odometry</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Twin Limelight 4 vision systems are mounted to the side panels in custom 3D-printed angled housings, utilizing AprilTag pipelines to maintain flawless absolute field odometry.
               </p>
             </div>
           </div>
 
           <div id="overlay-NAUO2111" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
-            <div class="absolute top-24 left-8 md:left-16 max-w-[300px] pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Shooter</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Flywheels</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute top-20 md:top-24 left-4 md:left-16 w-[45%] md:max-w-[300px] pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Shooter</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Flywheels</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Powered by dual PID-tuned Falcon 500s geared up 3.25:1, the shooter utilizes ten 4-inch wheels split across two main flywheels for unmatched shot stability and precision.
               </p>
             </div>
-            <div class="absolute bottom-32 left-8 md:left-16 max-w-[300px] pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Shooter</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Targeting</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute bottom-28 md:bottom-32 left-4 md:left-16 w-[45%] md:max-w-[300px] pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Shooter</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Targeting</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Two dedicated Limelight 4s lock onto the hub, allowing the software to automatically align the drivetrain and calculate dynamic RPMs for on-the-fly shooting from anywhere in the zone.
               </p>
             </div>
-            <div class="absolute top-24 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Shooter</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Agitator</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute top-20 md:top-24 right-4 md:right-16 w-[45%] md:max-w-[300px] text-right pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Shooter</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Agitator</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 An active agitator mechanism sits at the throat of the shooter, aggressively breaking up jams and ensuring a smooth, continuous feed of game pieces into the flywheels.
               </p>
             </div>
-            <div class="absolute bottom-32 right-8 md:right-16 max-w-[300px] text-right pointer-events-auto">
-              <h3 class="text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Shooter</h3>
-              <h2 class="text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Trajectory</h2>
-              <p class="text-xs leading-loose text-gray-600 font-medium">
+            <div class="absolute bottom-28 md:bottom-32 right-4 md:right-16 w-[45%] md:max-w-[300px] text-right pointer-events-none md:pointer-events-auto">
+              <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Shooter</h3>
+              <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Trajectory</h2>
+              <p class="text-[0.6rem] md:text-[0.6rem] md:text-xs leading-relaxed md:leading-loose text-gray-600 font-medium">
                 Clear polycarbonate guide plates ensure a rigid, stable trajectory for exiting game pieces, reinforced by twin 5mm aluminum side plates bearing the organic panther visual identity.
               </p>
             </div>
@@ -258,29 +304,45 @@ import Layout from '../../layouts/Layout.astro';
 
         </div>
 
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-40 w-max max-w-4xl">
-          <div class="bg-white/40 backdrop-blur-2xl border border-white/60 rounded-[2rem] p-3 px-6 md:px-8 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+        <!-- Mobile Info Drawer (replaces corner overlays on phones) -->
+        <div id="mobile-drawer" class="md:hidden absolute bottom-[68px] left-0 right-0 z-30 px-3">
+          <div class="bg-white/40 backdrop-blur-2xl border border-white/60 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+            <button id="drawer-toggle" class="w-full flex items-center justify-between px-4 py-2">
+              <span id="drawer-label" class="text-[10px] font-bold tracking-[0.15em] text-gray-900 uppercase">Assembly Details</span>
+              <svg id="drawer-chevron" class="w-3.5 h-3.5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path>
+              </svg>
+            </button>
+            <div id="drawer-content" class="overflow-hidden" style="max-height: 0; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
+              <div id="mobile-cards" class="flex gap-2.5 px-3 pb-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 z-40 w-[95%] md:w-max max-w-4xl">
+          <div class="bg-white/40 backdrop-blur-2xl border border-white/60 rounded-[2rem] p-2 md:p-3 px-3 md:px-8 flex flex-row items-center justify-between gap-2 md:gap-10 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
             
             <div id="mode-nav-container" class="relative flex bg-gray-100/50 rounded-xl p-1 border border-gray-200/50">
               <!-- Sliding background indicator -->
               <div id="mode-indicator" class="absolute bg-white shadow-sm rounded-lg smooth-transition z-0"></div>
 
-              <button id="isolate-btn" class="mode-toggle relative z-10 px-5 py-2 rounded-lg text-team-brand-accent font-bold text-xs uppercase tracking-wider transition-colors">
+              <button id="isolate-btn" class="mode-toggle relative z-10 px-3 md:px-5 py-1.5 md:py-2 rounded-lg text-team-brand-accent font-bold text-[9px] md:text-xs uppercase tracking-wider transition-colors">
                 Isolate
               </button>
-              <button id="ghost-btn" class="mode-toggle relative z-10 px-5 py-2 rounded-lg text-gray-500 hover:text-gray-900 font-bold text-xs uppercase tracking-wider transition-colors">
+              <button id="ghost-btn" class="mode-toggle relative z-10 px-3 md:px-5 py-1.5 md:py-2 rounded-lg text-gray-500 hover:text-gray-900 font-bold text-[9px] md:text-xs uppercase tracking-wider transition-colors">
                 Ghost
               </button>
             </div>
 
             <div class="flex-shrink-0 flex items-center justify-center">
-              <svg onclick="scrollToSoftware()" class="w-8 h-8 text-team-brand-accent cursor-pointer animate-pulse-glow hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg onclick="scrollToSoftware()" class="w-6 h-6 md:w-8 md:h-8 text-team-brand-accent cursor-pointer animate-pulse-glow hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
               </svg>
             </div>
 
-            <div class="flex items-center gap-4 w-[200px]">
-              <label class="text-gray-900 text-xs font-bold uppercase tracking-wider">Explode</label>
+            <div class="flex items-center gap-2 md:gap-4 w-[100px] md:w-[200px]">
+              <label class="text-gray-900 text-[9px] md:text-xs font-bold uppercase tracking-wider">Explode</label>
               <input 
                 id="explode-slider" 
                 type="range" min="0" max="1" step="0.01" value="0"
@@ -293,30 +355,30 @@ import Layout from '../../layouts/Layout.astro';
 
       </section>
 
-      <section class="h-screen w-full relative bg-team-light flex flex-col items-center pt-24 px-8">
+      <section class="min-h-screen w-full relative bg-team-light flex flex-col items-center pt-16 md:pt-24 pb-8 md:pb-12 px-4 md:px-8">
         
-        <div class="absolute top-10 left-1/2 transform -translate-x-1/2 z-50">
-          <svg onclick="scrollToCAD()" class="w-10 h-10 text-team-brand-accent cursor-pointer animate-pulse-glow hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="absolute top-6 md:top-10 left-1/2 transform -translate-x-1/2 z-50">
+          <svg onclick="scrollToCAD()" class="w-8 h-8 md:w-10 md:h-10 text-team-brand-accent cursor-pointer animate-pulse-glow hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path>
           </svg>
         </div>
 
-        <div class="max-w-5xl w-full mx-auto mt-12">
-          <h3 class="text-sm font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-2">Beyond the Hardware</h3>
-          <h2 class="text-5xl font-black tracking-tighter text-gray-900 mb-12 uppercase italic">Software Architecture</h2>
+        <div class="max-w-5xl w-full mx-auto mt-8 md:mt-12">
+          <h3 class="text-xs md:text-sm font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-2 text-center">Beyond the Hardware</h3>
+          <h2 class="text-2xl md:text-3xl lg:text-5xl font-black tracking-tighter text-gray-900 mb-4 md:mb-8 lg:mb-12 uppercase italic text-center">Software Architecture</h2>
           
-          <p class="text-lg leading-relaxed text-gray-600 mb-12 max-w-3xl">
+          <p class="text-sm md:text-lg leading-relaxed text-gray-600 mb-6 md:mb-12 max-w-3xl">
             With the mechanics completely locked in, the focus shifts to autonomous pathing, AprilTag odometry pipelines, and closed-loop control systems powered by WPILib.
           </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-3xl p-8 border border-team-light-200/50 shadow-sm hover:shadow-md transition-shadow">
-              <h4 class="text-xl font-black italic uppercase text-gray-900 mb-4">Vision Pipeline</h4>
-              <p class="text-sm text-gray-600 leading-relaxed">Odometry...</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+            <div class="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 border border-team-light-200/50 shadow-sm hover:shadow-md transition-shadow">
+              <h4 class="text-lg md:text-xl font-black italic uppercase text-gray-900 mb-3 md:mb-4">Vision Pipeline</h4>
+              <p class="text-xs md:text-sm text-gray-600 leading-relaxed">Odometry...</p>
             </div>
-            <div class="bg-white rounded-3xl p-8 border border-team-light-200/50 shadow-sm hover:shadow-md transition-shadow">
-              <h4 class="text-xl font-black italic uppercase text-gray-900 mb-4">Autonomous Routines</h4>
-              <p class="text-sm text-gray-600 leading-relaxed">Trajectories...</p>
+            <div class="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 border border-team-light-200/50 shadow-sm hover:shadow-md transition-shadow">
+              <h4 class="text-lg md:text-xl font-black italic uppercase text-gray-900 mb-3 md:mb-4">Autonomous Routines</h4>
+              <p class="text-xs md:text-sm text-gray-600 leading-relaxed">Trajectories...</p>
             </div>
           </div>
         </div>
@@ -367,16 +429,21 @@ import Layout from '../../layouts/Layout.astro';
           viewer.setGhosting(false);
 
           viewer.loadExtension('Autodesk.ViewCubeUi').then((viewCubeExt) => {
+            
+            function setInitialCamera() {
+              viewCubeExt.setViewCube('front-top-left'); 
+              // Scale camera out more on smaller screens since the aspect ratio is taller
+              let scaleFactor = window.innerWidth < 768 ? 2.0 : (window.innerWidth < 1024 ? 1.6 : 1.2);
+              viewer.navigation.getCamera().position.multiplyScalar(scaleFactor); 
+              viewer.navigation.updateCamera();
+            }
+
             if (viewer.model && viewer.model.isLoadDone()) {
-               viewCubeExt.setViewCube('front-top-left'); 
-               viewer.navigation.getCamera().position.multiplyScalar(1.2); 
-               viewer.navigation.updateCamera();
+               setInitialCamera();
             } else {
                viewer.addEventListener(Autodesk.Viewing.GEOMETRY_LOADED_EVENT, () => {
                  setTimeout(() => {
-                   viewCubeExt.setViewCube('front-top-left'); 
-                   viewer.navigation.getCamera().position.multiplyScalar(1.2); 
-                   viewer.navigation.updateCamera();
+                   setInitialCamera();
                  }, 200);
                });
             }
@@ -500,6 +567,9 @@ import Layout from '../../layouts/Layout.astro';
             activeOverlay.classList.add('opacity-100', 'visible');
           }
 
+          // Update mobile drawer content for active subsystem
+          populateMobileCards(target);
+
           if (target === 'full') {
             viewer.showAll();
             viewer.isolate();
@@ -541,6 +611,81 @@ import Layout from '../../layouts/Layout.astro';
           }
         });
       });
+
+      // --- MOBILE DRAWER LOGIC ---
+      const drawerToggle = document.getElementById('drawer-toggle');
+      const drawerContent = document.getElementById('drawer-content');
+      const drawerChevron = document.getElementById('drawer-chevron');
+      const drawerLabel = document.getElementById('drawer-label');
+      let drawerOpen = false;
+
+      if (drawerToggle) {
+        drawerToggle.addEventListener('click', () => {
+          drawerOpen = !drawerOpen;
+          if (drawerOpen) {
+            drawerContent.style.maxHeight = drawerContent.scrollHeight + 'px';
+            drawerChevron.classList.add('rotated');
+          } else {
+            drawerContent.style.maxHeight = '0';
+            drawerChevron.classList.remove('rotated');
+          }
+        });
+      }
+
+      function populateMobileCards(target) {
+        const mobileCards = document.getElementById('mobile-cards');
+        if (!mobileCards) return;
+        const overlay = document.getElementById('overlay-' + target);
+        if (!overlay) return;
+
+        mobileCards.innerHTML = '';
+
+        const labelMap = {
+          'full': 'Assembly',
+          'NAUO289': 'Drivetrain',
+          'NAUO861': 'Intake',
+          'NAUO1171': 'Hopper',
+          'NAUO2111': 'Shooter'
+        };
+        if (drawerLabel) {
+          drawerLabel.textContent = (labelMap[target] || 'Subsystem') + ' Details';
+        }
+
+        const panels = overlay.querySelectorAll(':scope > div');
+        panels.forEach(panel => {
+          const card = document.createElement('div');
+          card.className = 'mobile-card bg-white/70 backdrop-blur-xl rounded-xl p-3 border border-white/40 shadow-sm';
+
+          const h3 = panel.querySelector('h3');
+          const h2 = panel.querySelector('h2');
+          const p = panel.querySelector('p');
+          const details = panel.querySelector('.space-y-2');
+
+          let html = '';
+          if (h3) html += '<h3 class="text-[8px] font-bold tracking-[0.2em] uppercase mb-0.5" style="color: var(--accent-color);">' + h3.textContent + '</h3>';
+          if (h2) html += '<h2 class="text-xs font-black tracking-tight text-gray-900 uppercase italic mb-1">' + h2.textContent + '</h2>';
+          if (p) html += '<p class="text-[9px] leading-relaxed text-gray-600 font-medium">' + p.innerHTML + '</p>';
+          if (details) {
+            html += '<div class="mt-1.5 space-y-1">';
+            details.querySelectorAll('p').forEach(dp => {
+              html += '<p class="text-[9px] leading-relaxed text-gray-500 font-bold">' + dp.innerHTML + '</p>';
+            });
+            html += '</div>';
+          }
+
+          card.innerHTML = html;
+          mobileCards.appendChild(card);
+        });
+
+        if (drawerOpen && drawerContent) {
+          requestAnimationFrame(() => {
+            drawerContent.style.maxHeight = drawerContent.scrollHeight + 'px';
+          });
+        }
+      }
+
+      // Populate initial content for mobile drawer
+      populateMobileCards('full');
     }
   </script>
 </Layout>
