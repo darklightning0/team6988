@@ -75,12 +75,15 @@ function withDefault(palette, hex) {
   return { ...palette, DEFAULT: hex };
 }
 
-const teamColors = Object.fromEntries(
-  Object.entries(BASE_COLORS).map(([name, hex]) => [
-    name,
-    withDefault(generatePalette(hex), hex),
-  ]),
-);
+const teamColors = {
+  ...Object.fromEntries(
+    Object.entries(BASE_COLORS).map(([name, hex]) => [
+      name,
+      withDefault(generatePalette(hex), hex),
+    ]),
+  ),
+  'team-brand-accent': 'var(--accent-color, #1814BA)',
+};
 
 export default {
   theme: {
