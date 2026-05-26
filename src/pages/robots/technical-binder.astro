@@ -137,13 +137,13 @@ import Layout from '../../layouts/Layout.astro';
             <button data-target="NAUO289" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
               DRIVEBASE
             </button>
-            <button data-target="NAUO861" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
+            <button data-target="NAUO922" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
               INTAKE
             </button>
-            <button data-target="NAUO1171" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
+            <button data-target="NAUO1232" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
               HOPPER
             </button>
-            <button data-target="NAUO2111" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
+            <button data-target="NAUO2172" class="subsystem-btn relative z-10 px-5 md:px-6 py-2 md:py-2.5 rounded-full text-gray-500 hover:text-gray-900 font-bold text-[10px] md:text-sm tracking-wide transition-all duration-300 min-w-max md:min-w-0 md:w-1/5 text-center">
               SHOOTER
             </button>
           </div>
@@ -224,7 +224,7 @@ import Layout from '../../layouts/Layout.astro';
             </div>
           </div>
 
-          <div id="overlay-NAUO861" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
+          <div id="overlay-NAUO922" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
             <div class="absolute top-20 md:top-24 left-4 md:left-16 w-[45%] md:max-w-[300px] pointer-events-none md:pointer-events-auto">
               <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Intake</h3>
               <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Actuation</h2>
@@ -255,7 +255,7 @@ import Layout from '../../layouts/Layout.astro';
             </div>
           </div>
 
-          <div id="overlay-NAUO1171" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
+          <div id="overlay-NAUO1232" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
             <div class="absolute top-20 md:top-24 left-4 md:left-16 w-[45%] md:max-w-[300px] pointer-events-none md:pointer-events-auto">
               <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Hopper</h3>
               <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Floor Belts</h2>
@@ -286,7 +286,7 @@ import Layout from '../../layouts/Layout.astro';
             </div>
           </div>
 
-          <div id="overlay-NAUO2111" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
+          <div id="overlay-NAUO2172" class="text-overlay absolute inset-0 transition-all duration-500 opacity-0 invisible pointer-events-none">
             <div class="absolute top-20 md:top-24 left-4 md:left-16 w-[45%] md:max-w-[300px] pointer-events-none md:pointer-events-auto">
               <h3 class="text-[0.5rem] md:text-[0.65rem] font-bold tracking-[0.2em] text-team-brand-accent uppercase mb-1">Shooter</h3>
               <h2 class="text-lg md:text-2xl font-black tracking-tighter text-gray-900 mb-2 uppercase italic">Flywheels</h2>
@@ -537,7 +537,7 @@ import Layout from '../../layouts/Layout.astro';
         .then((data) => callback(data.access_token, data.expires_in));
     }
 
-    const URN = 'dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dGVhbTY5ODgtYmluZGVyL3Rlc3Quc3RlcA';
+    const URN = 'dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dGVhbTY5ODgtYmluZGVyLzIwMjZDYWQuc3RlcA';
     let viewer;
     let isGhostMode = false;
 
@@ -800,9 +800,9 @@ import Layout from '../../layouts/Layout.astro';
         const labelMap = {
           'full': 'Assembly',
           'NAUO289': 'Drivetrain',
-          'NAUO861': 'Intake',
-          'NAUO1171': 'Hopper',
-          'NAUO2111': 'Shooter'
+          'NAUO922': 'Intake',
+          'NAUO1232': 'Hopper',
+          'NAUO2172': 'Shooter'
         };
         if (drawerLabel) {
           drawerLabel.textContent = (labelMap[target] || 'Subsystem') + ' Details';
